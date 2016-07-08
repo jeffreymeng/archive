@@ -7,7 +7,7 @@
  *
  *       http://www.apache.org/licenses/LICENSE-2.0
  *                      -- or --
- *       https://penjs.github.io/code/LICENSE.txt
+ *       https://archive.jeffkmeng.com/code/LICENSE.txt
  *
  *   Unless required by applicable law or agreed to in writing, software
  *   distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,9 +15,9 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
- 
 
-$.fn.alert = function() {
+$.fn.showAlerts = function() {
+	
     var getAlertObj = function() {
     var url = window.location.href;
     var name = "alert";
@@ -28,4 +28,11 @@ $.fn.alert = function() {
     return JSON.parse(decodeURIComponent(results[2].replace(/\+/g, " ")));
 
         };
+        console.log(getAlertObj());
+        console.log(this)
+
+	this.html(JSON.stringify(getAlertObj()));
 };
+$.fn.getAlertQuery = function() {
+	
+}
