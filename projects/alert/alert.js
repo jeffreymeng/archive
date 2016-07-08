@@ -33,9 +33,19 @@ $.fn.showAlerts = function() {
 
 	this.html(JSON.stringify(getAlertObj()));
 };
-$.fn.praseAelertQuery = function(x) {
+$.fn.praseAlertQuery = function(text, type, dismissable, fadeout) {
+    if (arguments.length !== 1) {
+        x = {
+            "text":text,
+            "type":type,
+            "dismissable":dismissable,
+            "fadeout":fadeout
+        };
+    } else if (Array.isArray(text)) {
+        x = text
+    } else {
+        x = []
+        x.push(text);
+    }
     return "alert=" + encodeURIComponent(JSON.stringify(x));
-}
-$.fn.redirectWithAlert = function(url,  x) {
-    window.location.href = "alert=" + encodeURIComponent(JSON.stringify(x));
 }
