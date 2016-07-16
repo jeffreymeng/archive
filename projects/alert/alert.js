@@ -15,9 +15,11 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
+(function($) { // Hide scope, no $ conflict 
+    // All the other code ... 
 
 $.fn.showAlerts = function() {
-	
+    
     var getAlertObj = function() {
     var url = window.location.href;
     var name = "alert";
@@ -25,15 +27,16 @@ $.fn.showAlerts = function() {
         results = regex.exec(url);
     if (!results) return null;
     if (!results[2]) return '';
-    return JSON.parse(decodeURIComponent(results[2].replace(/\+/g, " ")));
+    return JSON.parse(atob(decodeURIComponent(results[2].replace(/\+/g, " "))));
 
         };
         console.log(getAlertObj());
         console.log(this)
 
-	this.html(JSON.stringify(getAlertObj()));
+    this.html(JSON.stringify(getAlertObj()));
 };
-$.fn.praseAlertQuery = function(text, type, dismissable, fadeout) {
+
+$.praseAlertQuery = function(text, type, dismissable, fadeout) {
     if (arguments.length !== 1) {
         x = {
             "text":text,
@@ -47,5 +50,6 @@ $.fn.praseAlertQuery = function(text, type, dismissable, fadeout) {
         x = []
         x.push(text);
     }
-    return "alert=" + encodeURIComponent(JSON.stringify(x));
+    return "alert=" + encodeURIComponent(btoa(JSON.stringify(x)));
 }
+})(jQuery);
