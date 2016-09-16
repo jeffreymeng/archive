@@ -43,7 +43,7 @@
                 var key = decodeURIComponent(window.location.pathname.split("/")[3]);
                 console.log(key);
                 console.log(window.location.pathname.split("/")[3]);
-                firebase.database().ref("/files/" + key).once("value", function(data) {
+                firebase.database().ref("/files/" + key).once("value").then( function(data) {
                     console.log(3);
                     if (data === null) {
                         $("#error404").removeClass("hidden");
@@ -53,7 +53,7 @@
                         var type = data.type;
                         var url = data.url;
                         console.log(data);
-                        alert(url);
+                        //alert(url);
                         console.log(url);
                         if (type.split("/")[0] === "image") {
                             $("#img").attr("src", url);
