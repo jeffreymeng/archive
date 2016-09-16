@@ -35,14 +35,18 @@
 
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
+            console.log(1);
             // User is signed in.
             if (window.location.pathname.split("/")[1] === "other" && window.location.pathname.split("/")[2] === "view") {
+                console.log(1);
                 var key = atob(decodeURIComponent(window.location.pathname.split("/")[3]));
                 firebase.database().ref("/files/" + key).once("value", function(data) {
+                    console.log(3);
                     if (data === null) {
                         $("#error404").removeClass("hidden");
                     }
                     else {
+                        console.log(4);
                         var type = data.type;
                         var url = data.url;
                         console.log(data);
