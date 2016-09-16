@@ -59,7 +59,8 @@
         var ref = firebase.storage().ref();
         $("#upload-btn").click(function() {
 
-            var file = $("#upload")[0].files;
+            var file = $('#upload').get(0).files[0];
+
 
 
 
