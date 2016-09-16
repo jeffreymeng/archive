@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Jeffrey Meng">
+    <link rel="stylesheet" type="text/css" href="https://assets.jeffkmeng.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <title>Jeffrey Archive - Other</title>
+    <style>
+        .hidden {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-lg-12">
+            <h1>Jeffrey Archive - Other</h1>
+            <p class="text-muted">Other files in Jeffrey's Archive.</p>
+            <hr>
+            <input type="file" id="upload">
+            
+<div id="progress" class="progress hidden">
+  <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="0"
+  aria-valuemin="2" aria-valuemax="100" style="width:0%">
+    <span id="progress-number">0</span>%
+  </div>
+</div>
+            <p id="success" class="text-success">Success: You can now view your file at <span id="link"></span>.</p>
+
+        </div>
+    </div>
+    <script src="https://assets.jeffkmeng.com/jquery/2.2.4/js/jquery.min.js"></script>
+
+    <script src="https://assets.jeffkmeng.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+    <script>
+    /* global firebase */
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyB7qu5kfGdvmLSoghSrEmSmwu4AEsR4WKU",
+            authDomain: "jdrive.firebaseapp.com",
+            databaseURL: "https://jdrive.firebaseio.com",
+            storageBucket: "firebase-jdrive.appspot.com",
+            messagingSenderId: "242289245420"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script>
+        /* global $ firebase */
+        firebase.auth().signInAnonymously().catch(function(error) {
+            console.log(error);
+        });
+        var file = $("#upload")[0].files;
+        var ref = firebase.storage().ref();
+
+
+        // Upload file to the object 'images/NAME.jpg'
+        var uploadTask = ref.child('files/' + file.name).put(file);
+        $("#progress").removeClass("hidden");
+        // Listen for state changes, errors, and completion of the upload.
+        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+            function(snapshot) {
+                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done');
+                $("#progress").style("width", progress + "%");
+                $("#progress-number").html(progress);
+                $("#progress-bar").attr("aria-valuenow", progress);
+                switch (snapshot.state) {
+                    case firebase.storage.TaskState.paused:
+                        console.log('Upload is paused');
+                        break;
+                    case firebase.storage.TaskState.running:
+                        console.log('Upload is running');
+                        break;
+                }
+            },
+            function(error) {
+                switch (error.code) {
+                    case 'storage/unauthorized':
+                        // User doesn't have permission to access the object
+                        $("#error").removeClass("hidden");
+                        $("#error").html("You don't have permission!");
+                        break;
+
+                    case 'storage/canceled':
+                        // User canceled the upload
+                        console.log("upload canclled");
+                        break;
+
+
+
+                    case 'storage/unknown':
+                        $("#error").removeClass("hidden");
+                        $("#error").html("Unnown Error Occurred. Please try again!");
+                        break;
+                }
+            },
+            function() {
+                // Upload completed successfully, now we can get the download URL
+                var downloadURL = uploadTask.snapshot.downloadURL;
+                console.log(downloadURL);
+                $("#link").attr("href", "https://archive.jeffkmeng.com/other/?url=" + encodeURIComponent(downloadURL));
+                $("#success").removeClass("hidden");
+            });
+    </script>
+</body>
+
+</html>
