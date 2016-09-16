@@ -85,7 +85,7 @@
                     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                     console.log('Upload is ' + progress + '% done');
-                    $("#progress").attr("style", "width:" + progress + "%;");
+                    $("#progress-bar").attr("style", "width:" + progress + "%;");
                     $("#progress-number").html(progress);
                     $("#progress-bar").attr("aria-valuenow", progress);
                     switch (snapshot.state) {
