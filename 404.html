@@ -5,7 +5,7 @@
 /* global $ atob */
     if (window.location.pathname.split("/")[1] === "other" && window.location.pathname.split("/")[2] === "view") {
         var type = window.location.pathname.split("/")[3] + "/" + window.location.pathname.split("/")[4];
-        var url = decodeURIComponent(atob(window.location.pathname.split("/")[5]));
+        var url = atob(decodeURIComponent(window.location.pathname.split("/")[5]));
         console.log(type);
         console.log(url);
         if (type.split("/")[0] === "image") {
