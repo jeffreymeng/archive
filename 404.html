@@ -35,26 +35,26 @@
 
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            console.log(1);
+            //console.log(1);
             // User is signed in.
             if (window.location.pathname.split("/")[1] === "other" && window.location.pathname.split("/")[2] === "view") {
-                console.log(2);
-                console.log(window.location.pathname.split("/")[3]);
+                //console.log(2);
+                //console.log(window.location.pathname.split("/")[3]);
                 var key = decodeURIComponent(window.location.pathname.split("/")[3]);
-                console.log(key);
-                console.log(window.location.pathname.split("/")[3]);
+                //console.log(key);
+                //console.log(window.location.pathname.split("/")[3]);
                 firebase.database().ref("/files/" + key).once("value").then( function(data) {
-                    console.log(3);
+                    //console.log(3);
                     if (data === null) {
                         $("#error404").removeClass("hidden");
                     }
                     else {
-                        console.log(4);
-                        var type = data.type;
-                        var url = data.url;
-                        console.log(data);
+                        //console.log(4);
+                        var type = data.val().type;
+                        var url = data.val().url;
+                        //console.log(data);
                         //alert(url);
-                        console.log(url);
+                        //console.log(url);
                         if (type.split("/")[0] === "image") {
                             $("#img").attr("src", url);
 

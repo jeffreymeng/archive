@@ -38,12 +38,12 @@
                 firebase.database().ref("/files/").on("child_added").then(function(data) {
 
 
-                    console.log(4);
-                    var name = data.name;
-                    var url = data.url;
-                    console.log(data);
+                    //console.log(4);
+                    var name = data.val().name;
+                    var url = data.val().url;
+                    //console.log(data);
                     //alert(url);
-                    console.log(url);
+                    //console.log(url);
                     $("#files").append("<a class='list-group-item' href='" + url + "'>" + name + "</div>");
 
                 });
