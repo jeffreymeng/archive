@@ -38,8 +38,9 @@
             console.log(1);
             // User is signed in.
             if (window.location.pathname.split("/")[1] === "other" && window.location.pathname.split("/")[2] === "view") {
-                console.log(1);
+                console.log(2);
                 var key = atob(decodeURIComponent(window.location.pathname.split("/")[3]));
+                console.log(key);
                 firebase.database().ref("/files/" + key).once("value", function(data) {
                     console.log(3);
                     if (data === null) {
