@@ -63,7 +63,7 @@
 
 
             var metaData = {
-                contentType: f.type
+                contentType: file.type
             };
 
             var uploadRef;
@@ -119,8 +119,8 @@
                     // Upload completed successfully, now we can get the download URL
                     var downloadURL = uploadTask.snapshot.downloadURL;
                     console.log(downloadURL);
-                    $("#link").attr("href", "https://archive.jeffkmeng.com/other/view/" + type + "/" + encodeURIComponent(btoa(downloadURL))) + "&type=" + f.type;
-                    $("#link").html("https://archive.jeffkmeng.com/other/view/" + type + "/" + encodeURIComponent(btoa(downloadURL))) + "&type=" + f.type;
+                    $("#link").attr("href", "https://archive.jeffkmeng.com/other/view/" + type + "/" + encodeURIComponent(btoa(downloadURL))) + "&type=" + file.type;
+                    $("#link").html("https://archive.jeffkmeng.com/other/view/" + type + "/" + encodeURIComponent(btoa(downloadURL))) + "&type=" + file.type;
                     $("#success").removeClass("hidden");
                 });
         });
