@@ -40,7 +40,7 @@
             if (window.location.pathname.split("/")[1] === "other" && window.location.pathname.split("/")[2] === "view") {
                 console.log(2);
                 console.log(window.location.pathname.split("/")[3]);
-                var key = atob(decodeURIComponent(window.location.pathname.split("/")[3]));
+                var key = decodeURIComponent(window.location.pathname.split("/")[3]);
                 console.log(key);
                 console.log(window.location.pathname.split("/")[3]);
                 firebase.database().ref("/files/" + key).once("value", function(data) {
