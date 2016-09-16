@@ -22,14 +22,13 @@
             <p class="text-muted">Other files in Jeffrey's Archive.</p>
             <hr>
             <input type="file" id="upload">
-            
-<div id="progress" class="progress hidden">
-  <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="0"
-  aria-valuemin="2" aria-valuemax="100" style="width:0%">
-    <span id="progress-number">0</span>%
-  </div>
-</div>
-            <p id="success" class="text-success">Success: You can now view your file at <span id="link"></span>.</p>
+            <button class="btn btn-primary" id="upload-btn">Upload!</button>
+            <div id="progress" class="progress hidden">
+                <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="2" aria-valuemax="100" style="width:0%">
+                    <span id="progress-number">0</span>%
+                </div>
+            </div>
+            <p id="success" class="hidden text-success">Success: You can now view your file at <span id="link"></span>.</p>
 
         </div>
     </div>
@@ -41,7 +40,7 @@
 
     <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
     <script>
-    /* global firebase */
+        /* global firebase */
         // Initialize Firebase
         var config = {
             apiKey: "AIzaSyB7qu5kfGdvmLSoghSrEmSmwu4AEsR4WKU",
@@ -57,59 +56,63 @@
         firebase.auth().signInAnonymously().catch(function(error) {
             console.log(error);
         });
-        var file = $("#upload")[0].files;
         var ref = firebase.storage().ref();
+        $("#upload-btn").click(function() {
 
-
-        // Upload file to the object 'images/NAME.jpg'
-        var uploadTask = ref.child('files/' + file.name).put(file);
-        $("#progress").removeClass("hidden");
-        // Listen for state changes, errors, and completion of the upload.
-        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-            function(snapshot) {
-                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                console.log('Upload is ' + progress + '% done');
-                $("#progress").style("width", progress + "%");
-                $("#progress-number").html(progress);
-                $("#progress-bar").attr("aria-valuenow", progress);
-                switch (snapshot.state) {
-                    case firebase.storage.TaskState.paused:
-                        console.log('Upload is paused');
-                        break;
-                    case firebase.storage.TaskState.running:
-                        console.log('Upload is running');
-                        break;
-                }
-            },
-            function(error) {
-                switch (error.code) {
-                    case 'storage/unauthorized':
-                        // User doesn't have permission to access the object
-                        $("#error").removeClass("hidden");
-                        $("#error").html("You don't have permission!");
-                        break;
-
-                    case 'storage/canceled':
-                        // User canceled the upload
-                        console.log("upload canclled");
-                        break;
+            var file = $("#upload")[0].files;
 
 
 
-                    case 'storage/unknown':
-                        $("#error").removeClass("hidden");
-                        $("#error").html("Unnown Error Occurred. Please try again!");
-                        break;
-                }
-            },
-            function() {
-                // Upload completed successfully, now we can get the download URL
-                var downloadURL = uploadTask.snapshot.downloadURL;
-                console.log(downloadURL);
-                $("#link").attr("href", "https://archive.jeffkmeng.com/other/?url=" + encodeURIComponent(downloadURL));
-                $("#success").removeClass("hidden");
-            });
+            // Upload file to the object 'images/NAME.jpg'
+            var uploadTask = ref.child('files/' + file.name).put(file);
+            $("#progress").removeClass("hidden");
+            // Listen for state changes, errors, and completion of the upload.
+            uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+                function(snapshot) {
+                    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                    $("#progress").style("width", progress + "%");
+                    $("#progress-number").html(progress);
+                    $("#progress-bar").attr("aria-valuenow", progress);
+                    switch (snapshot.state) {
+                        case firebase.storage.TaskState.paused:
+                            console.log('Upload is paused');
+                            break;
+                        case firebase.storage.TaskState.running:
+                            console.log('Upload is running');
+                            break;
+                    }
+                },
+                function(error) {
+                    switch (error.code) {
+                        case 'storage/unauthorized':
+                            // User doesn't have permission to access the object
+                            $("#error").removeClass("hidden");
+                            $("#error").html("You don't have permission!");
+                            break;
+
+                        case 'storage/canceled':
+                            // User canceled the upload
+                            console.log("upload canclled");
+                            break;
+
+
+
+                        case 'storage/unknown':
+                            $("#error").removeClass("hidden");
+                            $("#error").html("Unnown Error Occurred. Please try again!");
+                            break;
+                    }
+                },
+                function() {
+                    // Upload completed successfully, now we can get the download URL
+                    var downloadURL = uploadTask.snapshot.downloadURL;
+                    console.log(downloadURL);
+                    $("#link").attr("href", "https://archive.jeffkmeng.com/other/?url=" + encodeURIComponent(downloadURL));
+                    $("#success").removeClass("hidden");
+                });
+        });
     </script>
 </body>
 
