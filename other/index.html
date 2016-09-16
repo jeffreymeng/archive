@@ -60,12 +60,12 @@
         $("#upload-btn").click(function() {
 
             var file = $('#upload').get(0).files[0];
+            var contentType = file.type;
 
 
             var metaData = {
-                contentType: file.type
+                contentType: contentType
             };
-
             var uploadRef;
             if (contentType.split("/")[0] === "image") {
                 uploadRef = ref.child('images/' + file.name);
