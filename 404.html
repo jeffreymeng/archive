@@ -1,26 +1,66 @@
 <style>
-img {
-    height: auto;
-    width: 100%;
-}
+    img {
+        height: auto;
+        width: 100%;
+    }
+    
+    .hidden {
+        display: none;
+    }
 </style>
-    <img id="img"></img>
+<link rel="stylesheet" type="text/css" href="https://assets.jeffkmeng.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
+<img id="img"></img>
+<div class="hidden container">
+    <h1>404 Error</h1>
+    <p>File not found. Check you url. This page may have been moved or deleted.</p>
+</div>
 
 <script src="https://assets.jeffkmeng.com/jquery/2.2.4/js/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
 <script>
-    /* global $ atob */
-    if (window.location.pathname.split("/")[1] === "other" && window.location.pathname.split("/")[2] === "view") {
-        var type = window.location.pathname.split("/")[3] + "/" + window.location.pathname.split("/")[4];
-        var url = atob(decodeURIComponent(window.location.pathname.split("/")[5]));
-        console.log(type);
-        console.log(url);
-        if (type.split("/")[0] === "image") {
-            $("#img").attr("src", url);
-            
+    /* global firebase */
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyB7qu5kfGdvmLSoghSrEmSmwu4AEsR4WKU",
+        authDomain: "jdrive.firebaseapp.com",
+        databaseURL: "https://jdrive.firebaseio.com",
+        storageBucket: "firebase-jdrive.appspot.com",
+        messagingSenderId: "242289245420"
+    };
+    firebase.initializeApp(config);
+</script>
+<script>
+    /* global $ atob firebase */
+    /* global $ firebase btoa*/
+
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in.
+            if (window.location.pathname.split("/")[1] === "other" && window.location.pathname.split("/")[2] === "view") {
+                var key = atob(decodeURIComponent(window.location.pathname.split("/")[3]));
+                firebase.database().ref().child("/files/" + key).once("value", function(data) {
+                    var type = data.type;
+                    var url = data.url;
+                    if (type.split("/")[0] === "image") {
+                        $("#img").attr("src", url);
+
+                    }
+                    else {
+                        window.location.href = url;
+                    }
+                });
+
+
+            }
         }
         else {
-            window.location.href = url;
+            // No user is signed in.
+            //window.location.href = "/login/";
+            firebase.auth().signInAnonymously().catch(function(error) {
+                console.log(error);
+            });
+            window.location.href = window.location.href;
         }
-    }
+    });
 </script>
