@@ -77,7 +77,7 @@
             var uploadTask = uploadRef.put(file, metaData);
             $("#progress").removeClass("hidden");
             // Listen for state changes, errors, and completion of the upload.
-            uploadTask.on("firebase.storage.TaskEvent.state_changed",
+            uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
                 function(snapshot) {
                     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -86,10 +86,10 @@
                     $("#progress-number").html(progress);
                     $("#progress-bar").attr("aria-valuenow", progress);
                     switch (snapshot.state) {
-                        case firebase.storage.TaskState.paused:
+                        case firebase.storage.TaskState.PAUSED:
                             console.log('Upload is paused');
                             break;
-                        case firebase.storage.TaskState.running:
+                        case firebase.storage.TaskState.RUNNING:
                             console.log('Upload is running');
                             break;
                     }
