@@ -67,11 +67,14 @@
                 contentType: contentType
             };
             var uploadRef;
+            var refString;
             if (contentType.split("/")[0] === "image") {
                 uploadRef = ref.child('images/' + file.name);
+                refString = 'images/' + file.name
             }
             else {
                 uploadRef = ref.child('other/' + file.name);
+                refString = 'other/' + file.name
             }
             // Upload file and metadata to the object 'images/NAME or other/NAME'
             var uploadTask = uploadRef.put(file, metaData);
