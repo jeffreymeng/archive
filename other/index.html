@@ -52,7 +52,7 @@
         firebase.initializeApp(config);
     </script>
     <script>
-        /* global $ firebase */
+        /* global $ firebase btoa*/
         firebase.auth().signInAnonymously().catch(function(error) {
             console.log(error);
         });
@@ -63,12 +63,14 @@
 
 
             var metaData = {
-                contentType:f.type
+                contentType: f.type
             };
+
             var uploadRef;
             if (contentType.split("/")[0] === "image") {
                 uploadRef = ref.child('images/' + file.name);
-            } else {
+            }
+            else {
                 uploadRef = ref.child('other/' + file.name);
             }
             // Upload file and metadata to the object 'images/NAME or other/NAME'
@@ -80,7 +82,7 @@
                     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                     console.log('Upload is ' + progress + '% done');
-                    $("#progress").attr("style", "width:"+ progress + "%;");
+                    $("#progress").attr("style", "width:" + progress + "%;");
                     $("#progress-number").html(progress);
                     $("#progress-bar").attr("aria-valuenow", progress);
                     switch (snapshot.state) {
@@ -117,8 +119,8 @@
                     // Upload completed successfully, now we can get the download URL
                     var downloadURL = uploadTask.snapshot.downloadURL;
                     console.log(downloadURL);
-                    $("#link").attr("href", "https://archive.jeffkmeng.com/other/view/?url=" + encodeURIComponent(downloadURL));
-                    $("#link").html("https://archive.jeffkmeng.com/other/view/?url=" + encodeURIComponent(downloadURL));
+                    $("#link").attr("href", "https://archive.jeffkmeng.com/other/view/" + type + "/" + encodeURIComponent(btoa(downloadURL))) + "&type=" + f.type;
+                    $("#link").html("https://archive.jeffkmeng.com/other/view/" + type + "/" + encodeURIComponent(btoa(downloadURL))) + "&type=" + f.type;
                     $("#success").removeClass("hidden");
                 });
         });
