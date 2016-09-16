@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="https://assets.jeffkmeng.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <img id="img"></img>
-<div class="hidden container">
+<div class="hidden container" id="error404">
     <h1>404 Error</h1>
     <p>File not found. Check you url. This page may have been moved or deleted.</p>
 </div>
@@ -40,18 +40,26 @@
             if (window.location.pathname.split("/")[1] === "other" && window.location.pathname.split("/")[2] === "view") {
                 var key = atob(decodeURIComponent(window.location.pathname.split("/")[3]));
                 firebase.database().ref().child("/files/" + key).once("value", function(data) {
-                    var type = data.type;
-                    var url = data.url;
-                    if (type.split("/")[0] === "image") {
-                        $("#img").attr("src", url);
-
+                    if (data === null) {
+                        $("#error404").removeClass("hidden")
                     }
                     else {
-                        window.location.href = url;
+                        var type = data.type;
+                        var url = data.url;
+                        if (type.split("/")[0] === "image") {
+                            $("#img").attr("src", url);
+
+                        }
+                        else {
+                            window.location.href = url;
+                        }
                     }
                 });
 
 
+            }
+            else {
+                $("#error404").removeClass("hidden")
             }
         }
         else {
