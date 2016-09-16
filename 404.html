@@ -32,16 +32,15 @@
 </script>
 <script>
     /* global $ atob firebase */
-    /* global $ firebase btoa*/
 
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
             if (window.location.pathname.split("/")[1] === "other" && window.location.pathname.split("/")[2] === "view") {
                 var key = atob(decodeURIComponent(window.location.pathname.split("/")[3]));
-                firebase.database().ref().child("/files/" + key).once("value", function(data) {
+                firebase.database().ref("/files/" + key).once("value", function(data) {
                     if (data === null) {
-                        $("#error404").removeClass("hidden")
+                        $("#error404").removeClass("hidden");
                     }
                     else {
                         var type = data.type;
@@ -60,7 +59,7 @@
 
             }
             else {
-                $("#error404").removeClass("hidden")
+                $("#error404").removeClass("hidden");
             }
         }
         else {
