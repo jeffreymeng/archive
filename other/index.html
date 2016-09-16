@@ -33,7 +33,6 @@
         if (user) {
 
             // User is signed in.
-            if (window.location.pathname.split("/")[1] === "other" && window.location.pathname.split("/")[2] === "view") {
 
                 firebase.database().ref("/files/").on("child_added").then(function(data) {
 
@@ -49,10 +48,8 @@
                 });
 
 
-            }
-            else {
-                $("#error404").removeClass("hidden");
-            }
+            
+            
         }
         else {
             // No user is signed in.
