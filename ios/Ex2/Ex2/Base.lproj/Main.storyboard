@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Ex2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VFV-0h-KFV">
+                                <rect key="frame" x="180" y="129" width="240" height="128"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gHZ-f9-eZ7">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Qkd-Wo-khf">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zt2-xH-oPe">
+                                <rect key="frame" x="180" y="307" width="240" height="201"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xks-iI-SCd">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="201"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="RVK-Dz-yIB">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="201"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="LpC-ui-23E">
+                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="201"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="201" id="RWn-bn-adk"/>
+                                                            <constraint firstAttribute="height" constant="201" id="XBv-xF-f0P"/>
+                                                            <constraint firstAttribute="width" constant="240" id="cyK-wq-re0"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="eji-QL-reF"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="spring.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Aht-kL-tL7">
+                                <rect key="frame" x="180" y="77" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="1hw-VF-qDB"/>
+                                    <constraint firstAttribute="height" constant="128" id="46y-qf-wlm"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="EUw-p8-xgh"/>
+                                    <constraint firstAttribute="width" constant="240" id="VJe-Qo-6b3"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zt2-xH-oPe" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="FV8-Wl-1Yt"/>
+                            <constraint firstItem="zt2-xH-oPe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L3a-Gz-AwQ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="305" y="355"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo.png" width="350" height="350"/>
+        <image name="spring.jpg" width="2880" height="1800"/>
+    </resources>
+</document>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Four_Seasons" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="spring.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="S3i-oj-xK5">
+                                <rect key="frame" x="40" y="56" width="240" height="128"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="fall.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="0m3-2r-il4">
+                                <rect key="frame" x="40" y="270" width="240" height="128"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="winter.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="DYz-iX-xOd">
+                                <rect key="frame" x="323" y="270" width="240" height="128"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1z-03-TSJ">
+                                <rect key="frame" x="40" y="56" width="240" height="128"/>
+                                <connections>
+                                    <segue destination="tYV-TK-1Ex" kind="show" id="Ov7-2C-Vs3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRh-DF-a7c">
+                                <rect key="frame" x="323" y="56" width="240" height="128"/>
+                                <connections>
+                                    <segue destination="ysm-he-9M3" kind="show" id="m4e-XR-lxy"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="summer.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="bBS-oD-HKu">
+                                <rect key="frame" x="323" y="56" width="240" height="128"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q99-nJ-bTD">
+                                <rect key="frame" x="323" y="270" width="240" height="128"/>
+                                <connections>
+                                    <segue destination="Jwv-HD-omL" kind="show" id="9af-MF-6UM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="38" y="314"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="YPS-jQ-nVL">
+            <objects>
+                <viewController id="Jwv-HD-omL" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jKJ-Su-ly4"/>
+                        <viewControllerLayoutGuide type="bottom" id="Uva-3y-J5w"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7Cz-LQ-Z2o">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U0x-k1-jh9">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Winter" id="TcH-QG-8NL">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="16m-3o-UiJ">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="Rra-HJ-Bwt"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zna-48-uYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="677" y="267"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Qie-DT-7fz">
+            <objects>
+                <viewController id="ysm-he-9M3" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bQm-vL-91m"/>
+                        <viewControllerLayoutGuide type="bottom" id="45c-im-ZcS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5Ih-2Z-0bt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="summer.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="EKb-iK-epz">
+                                <rect key="frame" x="47" y="112" width="538" height="199"/>
+                            </imageView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OnW-nr-c2b">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Summer" id="L2g-PW-4fE">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="sFZ-iI-ztT">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="ihb-nw-F4y"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OPE-2y-oFf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-11" y="1025"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Blm-DR-8iZ">
+            <objects>
+                <viewController id="tYV-TK-1Ex" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DCN-vK-OtM"/>
+                        <viewControllerLayoutGuide type="bottom" id="DyF-uL-8FL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8Xn-DH-bm5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dBU-UV-pKr">
+                                <rect key="frame" x="0.0" y="-9" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Spring" id="cfa-0T-8ow">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="wvv-gN-dnG">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="eT4-w1-DF9"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="spring.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="P4q-M1-4pJ">
+                                <rect key="frame" x="97" y="35" width="418" height="223"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hy3-Ry-yvG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7" y="1118"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="fall.jpg" width="731" height="418"/>
+        <image name="spring.jpg" width="2880" height="1800"/>
+        <image name="summer.jpg" width="1920" height="1280"/>
+        <image name="winter.jpg" width="1920" height="1080"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Rra-HJ-Bwt"/>
+    </inferredMetricsTieBreakers>
+</document>
