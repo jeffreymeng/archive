@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.min.css">
 
-    <title>Jeffrey Archives - 404</title>
+    <title>Jeffrey Archives</title>
 
 </head>
 
@@ -22,28 +22,40 @@
             <!--<p class="text-muted">Welcome to the Jeffrey Archives</p>-->
             <nav class="breadcrumb">
                 <li class="breadcrumb-item" id="breadcrumb-first"><a href="/">Home</a></li>
-
+                
                 <span class="breadcrumb-item active" id="breadcrumb-last">404</span>
             </nav>
             <b>Page not found!</b>
-            <p>The requested resource does not currently exist at this location. <br> It may have been moved or deleted(also check your spelling!).<br> You may want to go to the <a href="/">Home Page</a> and select a link from there.<br>
-                <a href="/">Click here to return to the home page.</a></p>
+            <p>The requested resource does not currently exist at this location. <br>
+            It may have been moved or deleted(also check your spelling!).<br>
+            You may want to go to the <a href="/">Home Page</a> and select a link from there.<br>
+            <a href="/">Click here to return to the home page.</a></p>
 
 
 
 
         </div>
-
-    </div>
-    <div class="footer">
-        <div class="footer-content text-center">
-            Copyright &copy; 2017 Jeffrey Meng
+        <div class="footer">
+            <div class="footer-content text-center">
+                Copyright &copy; 2017 Jeffrey Meng
+            </div>
         </div>
     </div>
     <script src="/js/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-
+    <script>
+    /* global $ */
+        var path = window.location.pathname.substring(1).split("/");
+        if (path.length > 1) {
+            for (var i = 0; i < (path.length - 1)/*dosent loop through the last one*/; i ++) {
+                $('<li class="breadcrumb-item" id="breadcrumb-first"><a href="' + path.splice(0, i + 1).join("/") + '">' + path[i] + '</a></li>').insertBefore("p");
+            }
+            $("#breadcrumb-last").text(path[path.length - 1]);//last element
+        } else {
+           $("#breadcrumb-last").text(path[0]); 
+        }
+    </script>
 </body>
 
 </html>
