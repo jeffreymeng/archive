@@ -37,7 +37,7 @@
                 <label for="name">What is your name?</label>
                 <input type="text" id="name" class="form-control">
                 <p class="text-danger" id="name-help"></p>
-                <button class="btn btn-primary btn-block" id="enter" disabled>Enter Form</button>
+                <button class="btn btn-primary btn-block" id="enter" >Enter Form</button>
             </div>
         </div>
     </div>
@@ -50,13 +50,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script>
-        $("#name").keydown(function(e) {
-            if ($("#name").val().length > 0) {
-                $("#enter").removeAttr("disabled");
-            }
-            else {
-                $("#enter").attr("disabled", "");
-            }
+        $("#name").keyup(function(e) {
+            
             if (e.which == 13) {
                 $("#enter").click();
             }
