@@ -20,8 +20,6 @@
         .hidden {
             display: none;
         }
-
-        
     </style>
 </head>
 
@@ -37,40 +35,34 @@
                 <li class="breadcrumb-item">Dragons</li>
                 <span class="breadcrumb-item active">Transition Party</span>
             </nav>
-           
+
             <div id="content" class="">
                 <h1>Transition Party Survey</h1>
                 <p class="text-muted"><i class="fas fa-info-circle"></i> Your current URL can only be used to submit this form once. All future submissions will overwrite the previous submissions. Do not share your url.</p>
                 <hr>
                 <h3>Responses</h3>
-                <b>Friday, 2/2, from 4:30 P.M. - 8:30 P.M.</b>
                 <div class="card">
+
                     <div class="card-body">
+                        <h5 class="card-title">By Question</h5><br>
                         <canvas id="c1" width="400" height="400"></canvas>
-                    </div>
-
-                </div>
-                <b>Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.</b>
-                <div class="card">
-                    <div class="card-body">
                         <canvas id="c2" width="400" height="400"></canvas>
-                    </div>
-
-                </div>
-                <b>Sunday, 2/4, from 4:30 P.M. - 8:30 P.M.</b>
-                <div class="card">
-                    <div class="card-body">
                         <canvas id="c3" width="400" height="400"></canvas>
-                    </div>
-
-                </div>
-                <b>Friday, 2/9, from 4:30 P.M. - 8:30 P.M.</b>
-                <div class="card">
-                    <div class="card-body">
                         <canvas id="c4" width="400" height="400"></canvas>
                     </div>
 
                 </div>
+                <h3>Responses by Person</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">By Person</h5>
+                        <div id="accordion" id="accordion">
+                            
+                        </div>
+                    </div>
+
+                </div>
+
 
             </div>
 
@@ -112,6 +104,28 @@
             "grey": "rgb(201, 203, 207)"
         }
 
+        function captializeName(str) {
+            return str.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+        }
+
+        function getAccordionComponent(title, content) {
+            '<div class="card">' +
+            '<div class="card-header" id="headingOne">' +
+            '<h5 class="mb-0">' +
+            '<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">' +
+            title +
+                '</button>' +
+                '</h5>' +
+                '</div>' +
+
+                '<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">' +
+                '<div class="card-body">' +
+                content +
+                '</div>' +
+                '</div>' +
+                '</div>'
+        }
+
         function getQuery(name) {
             var url = window.location.href;
             name = name.replace(/[\[\]]/g, "\\$&");
@@ -121,21 +135,38 @@
             if (!results[2]) return '';
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
-        firebase.database().ref("/archive/bsa/dragons/transitionparty/finalperperson").once("value").then(function(snapshot) {
-            var data = snapshot.val();
+        firebase.database().ref("/archive/bsa/dragons/transitionparty/").once("value").then(function(snapshot) {
+            var final = snapshot.val().finalperperson;
+            var results = snapshot.val().results;
             var r1 = [0, 0, 0, 0],
                 r2 = [0, 0, 0, 0],
                 r3 = [0, 0, 0, 0],
                 r4 = [0, 0, 0, 0];
-            for (var key in data) {
-                if (data.hasOwnProperty(key)) {
+            var responseText = ["Can attend the whole time", "Can attend only partially", "Dones not know yet", "Can not attend"]
+            for (var key in final) {
+                if (final.hasOwnProperty(key)) {
                     //console.log(key + " -> " + data[key]);
-                    r1[data[key].answer.q1 - 1] += 1;
-                    r2[data[key].answer.q2 - 1] += 1;
-                    r3[data[key].answer.q3 - 1] += 1;
-                    r4[data[key].answer.q4 - 1] += 1;
+                    r1[final[key].answer.q1 - 1] += 1;
+                    r2[final[key].answer.q2 - 1] += 1;
+                    r3[final[key].answer.q3 - 1] += 1;
+                    r4[final[key].answer.q4 - 1] += 1;
                 }
             }
+            for (var key in results) {
+                var accordionText = "";
+                if (final.hasOwnProperty(key)) {
+                    for (var key2 in results[key])
+                    
+                    accordionText += "<b>Submitted: " + results[key][key2].end + "</b>" + 
+                    "<b>Friday, 2/2, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q1] +
+                    "<b>Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q2] +
+                    "<b>Sunday, 2/4, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q3] +
+                    "<b>Friday, 2/9, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q4] + "<hr>";
+                    
+                }
+                $("#accordion").append(getAccordionComponent(captalizeName(key), accordionText));
+            }
+            //charts
             console.log([r1, r2, r3, r4]);
             var c1 = $("#c1");
             var c2 = $("#c2");
@@ -254,7 +285,7 @@
                     }
                 }
             });
-            
+
 
         });
     </script>
