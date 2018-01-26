@@ -219,7 +219,7 @@
             var set1 = false;
             var set2 = false;
             data.end = Date();
-            var doneUrl = "/bsa/forms/dragons/transitionparty/done/?data=" + encodeURIComponent(btoa(JSON.stringify(data))) + "&operationComplete=" + encodeURIComponent(Date());
+            var doneUrl = "/bsa/forms/dragons/transitionparty/done/?data=" + encodeURIComponent(btoa(JSON.stringify(data, null, 2))) + "&operationComplete=" + encodeURIComponent(Date());
             firebase.database().ref("/archive/bsa/dragons/transitionparty/results/" + name + "/").push(data).then(function() {
                 set1 = true;
                 if (set2) {
