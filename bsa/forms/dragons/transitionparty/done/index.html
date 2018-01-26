@@ -76,7 +76,7 @@
         }
         $("#advanced").html(
             "<b>Operation Complete</b>: " + getQuery("operationComplete") +
-            "<b>Data</b>: " + JSON.stringify(atob(getQuery("data")))
+            "<b>Data</b>: " + JSON.stringify(atob(getQuery("data")), null, 2)
         );
     </script>
 
