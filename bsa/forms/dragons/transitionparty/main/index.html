@@ -225,7 +225,8 @@
                 }
             }).catch(function(error) {
                 alert("An unknown error occured. Please try again.");
-                window.location.href = window.location.href;
+                console.log(error);
+                //window.location.href = window.location.href;
             });
             firebase.database().ref("/archive/bsa/dragons/transitionparty/finalperperson/" + name + "/").set(data).then(function() {
                 set2 = true;
@@ -234,7 +235,8 @@
                 }
             }).catch(function() {
                 alert("An unknown error occured. Please try again.");
-                window.location.href = window.location.href;
+                console.log(error);
+                //window.location.href = window.location.href;
             });
         });
     </script>
