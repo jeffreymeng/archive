@@ -215,12 +215,11 @@
             $("#progress").css('width', amt + '%');
         }
 
-        var encodedData = encodeURIComponent(bota(JSON.stringify(data)));
         $("#submit").click(function() {
             var set1 = false;
             var set2 = false;
             data.end = Date();
-            var doneUrl = "/bsa/forms/dragons/transitionparty/done/?data=" + encodedData + "&operationComplete=" + encodeURIComponent(Date());
+            var doneUrl = "/bsa/forms/dragons/transitionparty/done/?data=" + encodeURIComponent(btoa(JSON.stringify(data))) + "&operationComplete=" + encodeURIComponent(Date());
             firebase.database().ref("/archive/bsa/dragons/transitionparty/results/" + name + "/").push(data).then(function() {
                 set1 = true;
                 if (set2) {
