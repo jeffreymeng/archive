@@ -114,9 +114,7 @@
         var data = { answer: {} };
         var current = 1;
         $(".option").click(function() {
-            console.log(current);
-            console.log("#q" + current);
-            console.log("#q" + (current + 1));
+            
             setProgress(current * 25);
             
             var option = parseInt($(this).attr("data-id"), 10);
@@ -128,6 +126,9 @@
                 $("#submit").removeAttr("disabled");
             });
             } else {
+                console.log(current);
+            console.log("#q" + current);
+            console.log("#q" + (current + 1));
                 $("#q" + current).fadeOut(500, function() {
                 $("#q" + (current + 1)).removeClass("hidden");
             });
