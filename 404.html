@@ -53,6 +53,7 @@
                 console.log(i);
                 console.log(path[i]);
                 var modifiedPath = path.splice(0, i + 1).join("/");
+                path = window.location.pathname.substring(1).split("/");
                 $('<li class="breadcrumb-item" id="breadcrumb-first"><a href="' + modifiedPath + '">' + path[i] + '</a></li>').insertBefore("#breadcrumb-last");
             }
             $("#breadcrumb-last").text(path[path.length - 1]);//last element
