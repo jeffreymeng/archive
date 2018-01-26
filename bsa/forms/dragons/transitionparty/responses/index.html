@@ -94,7 +94,7 @@
     </script>
 
     <script>
-    /* global $ */
+        /* global $ */
         var chartColors = {
             "red": "rgb(255, 99, 132)",
             "orange": "rgb(255, 159, 64)",
@@ -109,17 +109,23 @@
             return str.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
         }
 
+        //http://stackoverflow.com/a/17606289/5511561s
+        String.prototype.replaceAll = function(search, replacement) {
+            var target = this;
+            return target.replace(new RegExp(search, 'g'), replacement);
+        };
+
         function getAccordionComponent(title, content) {
             return '<div class="card">' +
-            '<div class="card-header" id="headingOne">' +
-            '<h5 class="mb-0">' +
-            '<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">' +
-            title +
+                '<div class="card-header" id="heading-' + title.replaceAll(" ", "") + '">' +
+                '<h5 class="mb-0">' +
+                '<button class="btn btn-link" data-toggle="collapse" data-target="#collapse' + title.replaceAll(" ", "") + '" aria-expanded="true" aria-controls="collapse' + title.replaceAll(" ", "") + '">' +
+                title +
                 '</button>' +
                 '</h5>' +
                 '</div>' +
 
-                '<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">' +
+                '<div id="collapse' + title.replaceAll(" ", "") + '" class="collapse show" aria-labelledby="heading' + title.replaceAll(" ", "") + '" data-parent="#accordion">' +
                 '<div class="card-body">' +
                 content +
                 '</div>' +
@@ -160,11 +166,11 @@
                     for (var key2 in results[key]) {
                         if (final.hasOwnProperty(key)) {
                             console.log(key2);
-                            accordionText = accordionText +  "<b>Submitted: " + results[key][key2].end + "</b>" +
-                                "<b>Friday, 2/2, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q1] +
-                                "<b>Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q2] +
-                                "<b>Sunday, 2/4, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q3] +
-                                "<b>Friday, 2/9, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q4] + "<hr>";
+                            accordionText = accordionText + "<b>Submitted: " + results[key][key2].end + "</b>" +
+                                "<b>Friday, 2/2, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q1 - 1] +
+                                "<b>Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q2 - 1] +
+                                "<b>Sunday, 2/4, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q3 - 1] +
+                                "<b>Friday, 2/9, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q4 - 1] + "<hr>";
                         }
                     }
                     console.log(accordionText);
