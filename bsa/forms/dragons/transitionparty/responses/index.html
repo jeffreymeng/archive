@@ -109,7 +109,7 @@
         }
 
         function getAccordionComponent(title, content) {
-            '<div class="card">' +
+            return '<div class="card">' +
             '<div class="card-header" id="headingOne">' +
             '<h5 class="mb-0">' +
             '<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">' +
@@ -123,7 +123,7 @@
                 content +
                 '</div>' +
                 '</div>' +
-                '</div>'
+                '</div>';
         }
 
         function getQuery(name) {
@@ -159,7 +159,7 @@
                     for (var key2 in results[key]) {
                         if (final.hasOwnProperty(key)) {
                             console.log(key2);
-                            accordionText += "<b>Submitted: " + results[key][key2].end + "</b>" +
+                            accordionText = accordionText +  "<b>Submitted: " + results[key][key2].end + "</b>" +
                                 "<b>Friday, 2/2, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q1] +
                                 "<b>Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q2] +
                                 "<b>Sunday, 2/4, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q3] +
