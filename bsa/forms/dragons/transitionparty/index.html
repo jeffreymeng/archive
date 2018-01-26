@@ -70,6 +70,7 @@
             }
             else if (names.indexOf(nameInput.toLowerCase()) > -1) {
                 window.location.href = "main/?key=" + encodeURIComponent(btoa(nameInput.toLowerCase()));
+                
             }
             else {
                 $("#name-help").html("You must be a current member of the Dragons patrol to fill out this form. Make sure your name exactly matches the one on the spreadsheet(case insensitive).");
