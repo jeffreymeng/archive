@@ -109,8 +109,23 @@
     <script src="/js/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
     <script>
-        /* global $ */
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDSCVcPcMzCXMjGhQvQJfkgnjCFzzewTgA",
+            authDomain: "jmeng.firebaseapp.com",
+            databaseURL: "https://jmeng.firebaseio.com",
+            projectId: "project-4679594405675385181",
+            storageBucket: "project-4679594405675385181.appspot.com",
+            messagingSenderId: "590199481216"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script>
+        /* global $ atob */
 
 
         //http://stackoverflow.com/a/901144/5511561
@@ -179,7 +194,7 @@
             $("#progress").attr('aria-valuenow', amt);
             $("#progress").css('width', amt + '%');
         }
-        $("#submit").click(function(){
+        $("#submit").click(function() {
             alert("Hi!");
         })
     </script>
