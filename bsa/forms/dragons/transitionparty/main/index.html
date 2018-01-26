@@ -235,7 +235,7 @@
                 if (set1) {
                     window.location.href = "/bsa/forms/dragons/transitionparty/done/?data=" + encodeURIComponent(bota(JSON.stringify(data))) + "&operationComplete=" + encodeURIComponent(Date());
                 }
-            }).catch(function() {
+            }).catch(function(error) {
                 alert("An unknown error occured. Please try again.");
                 console.log(error);
                 //window.location.href = window.location.href;
