@@ -56,7 +56,7 @@
                 <br>
             </div>
             <div class="question hidden" id="q2">
-                <p>Are you avaliable on Friday, 2/9, from 4:30 P.M. - 8:30 P.M.?</p>
+                <p>Are you avaliable on Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.?</p>
                 <button class="btn btn-success btn-block q2 option" data-id="1" id="q2op1">Yes.</button>
                 <br>
                 <button class="btn btn-warning btn-block q2 option" data-id="2" id="q2op2">I can only attend partially.</button>
@@ -67,7 +67,7 @@
                 <br>
             </div>
             <div class="question hidden" id="q3">
-                <p>Are you avaliable on Saturday, 2/10, from 4:30 P.M. - 8:30 P.M.?</p>
+                <p>Are you avaliable on Sunday, 2/4, from 4:30 P.M. - 8:30 P.M.?</p>
                 <button class="btn btn-success btn-block q3 option" data-id="1" id="q3op1">Yes.</button>
                 <br>
                 <button class="btn btn-warning btn-block q3 option" data-id="2" id="q3op2">I can only attend partially.</button>
@@ -78,7 +78,7 @@
                 <br>
             </div>
             <div class="question hidden" id="q4">
-                <p>Are you avaliable on Sunday, 2/11, from 4:30 P.M. - 8:30 P.M.?</p>
+                <p>Are you avaliable on Friday, 2/9, from 4:30 P.M. - 8:30 P.M.?</p>
                 <button class="btn btn-success btn-block q4 option" data-id="1" id="q4op1">Yes.</button>
                 <br>
                 <button class="btn btn-warning btn-block q4 option" data-id="2" id="q4op2">I can only attend partially.</button>
@@ -122,8 +122,8 @@
                 });
             }
             else {
-                $("#q" + (current + 1)).fadeOut(500, function() {
-                    $("#q" + current).removeClass("hidden");
+                $("#q" + (current + 2)).fadeOut(500, function() {
+                    $("#q" + (current + 1)).removeClass("hidden");
                 });
             }
 
