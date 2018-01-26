@@ -112,9 +112,9 @@
     <script>
         /* global $ */
         var data = { answer: {} };
-        var current = 1;
+        var current = 0;
         $(".option").click(function() {
-            
+            current += 1;
             setProgress(current * 25);
             
             var option = parseInt($(this).attr("data-id"), 10);
@@ -134,7 +134,7 @@
             });
             }
             
-            current += 1;
+            
 
             console.log(data);
         });
