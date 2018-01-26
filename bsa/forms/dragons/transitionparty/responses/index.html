@@ -94,6 +94,7 @@
     </script>
 
     <script>
+    /* global $ */
         var chartColors = {
             "red": "rgb(255, 99, 132)",
             "orange": "rgb(255, 159, 64)",
@@ -102,7 +103,7 @@
             "blue": "rgb(54, 162, 235)",
             "purple": "rgb(153, 102, 255)",
             "grey": "rgb(201, 203, 207)"
-        }
+        };
 
         function captializeName(str) {
             return str.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
@@ -142,7 +143,7 @@
                 r2 = [0, 0, 0, 0],
                 r3 = [0, 0, 0, 0],
                 r4 = [0, 0, 0, 0];
-            var responseText = ["Can attend the whole time", "Can attend only partially", "Does not know yet", "Can not attend"]
+            var responseText = ["Can attend the whole time", "Can attend only partially", "Does not know yet", "Can not attend"];
             for (var key in final) {
                 if (final.hasOwnProperty(key)) {
                     //console.log(key + " -> " + data[key]);
@@ -152,10 +153,10 @@
                     r4[final[key].answer.q4 - 1] += 1;
                 }
             }
-            for (var key in results) {
+            for (key in results) {
                 var accordionText = "";
                 if (final.hasOwnProperty(key)) {
-                    console.log(key)
+                    console.log(key);
                     for (var key2 in results[key]) {
                         if (final.hasOwnProperty(key)) {
                             console.log(key2);
