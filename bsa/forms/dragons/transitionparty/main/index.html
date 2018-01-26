@@ -16,9 +16,9 @@
     <script src="/fontawesome/js/fontawesome.min.js"></script>
 
     <title>Boy Scout Trips - Jeffrey Archives</title>
-<style>
+    <style>
         .hidden {
-            display:none;
+            display: none;
         }
     </style>
 </head>
@@ -46,50 +46,55 @@
             </div>
             <div class="question " id="q1">
                 <p>Are you avaliable on Friday, 2/2, from 4:30 P.M. - 8:30 P.M.?</p>
-                <button class="btn btn-success btn-block q1" data-id="1" id="q1op1">Yes.</button>
+                <button class="btn btn-success btn-block q1 option" data-id="1" id="q1op1">Yes.</button>
                 <br>
-                <button class="btn btn-warning btn-block q1" data-id="2" id="q1op2">I can only attend partially.</button>
+                <button class="btn btn-warning btn-block q1 option" data-id="2" id="q1op2">I can only attend partially.</button>
                 <br>
-                <button class="btn btn-warning btn-block q1" data-id="3" id="q1op3">I don't know yet.</button>
+                <button class="btn btn-warning btn-block q1 option" data-id="3" id="q1op3">I don't know yet.</button>
                 <br>
-                <button class="btn btn-danger btn-block q1" data-id="4" id="q1op4">No.</button>
+                <button class="btn btn-danger btn-block q1 option" data-id="4" id="q1op4">No.</button>
                 <br>
             </div>
             <div class="question hidden" id="q2">
                 <p>Are you avaliable on Friday, 2/9, from 4:30 P.M. - 8:30 P.M.?</p>
-                <button class="btn btn-success btn-block q2" data-id="1" id="q2op1">Yes.</button>
+                <button class="btn btn-success btn-block q2 option" data-id="1" id="q2op1">Yes.</button>
                 <br>
-                <button class="btn btn-warning btn-block q2" data-id="2" id="q2op2">I can only attend partially.</button>
+                <button class="btn btn-warning btn-block q2 option" data-id="2" id="q2op2">I can only attend partially.</button>
                 <br>
-                <button class="btn btn-warning btn-block q2" data-id="3" id="q2op3">I don't know yet.</button>
+                <button class="btn btn-warning btn-block q2 option" data-id="3" id="q2op3">I don't know yet.</button>
                 <br>
-                <button class="btn btn-danger btn-block q2" data-id="4" id="q2op4">No.</button>
+                <button class="btn btn-danger btn-block q2 option" data-id="4" id="q2op4">No.</button>
                 <br>
             </div>
             <div class="question hidden" id="q3">
                 <p>Are you avaliable on Saturday, 2/10, from 4:30 P.M. - 8:30 P.M.?</p>
-                <button class="btn btn-success btn-block q3" data-id="1" id="q3op1">Yes.</button>
+                <button class="btn btn-success btn-block q3 option" data-id="1" id="q3op1">Yes.</button>
                 <br>
-                <button class="btn btn-warning btn-block q3" data-id="2" id="q3op2">I can only attend partially.</button>
+                <button class="btn btn-warning btn-block q3 option" data-id="2" id="q3op2">I can only attend partially.</button>
                 <br>
-                <button class="btn btn-warning btn-block q3" data-id="3" id="q3op3">I don't know yet.</button>
+                <button class="btn btn-warning btn-block q3 option" data-id="3" id="q3op3">I don't know yet.</button>
                 <br>
-                <button class="btn btn-danger btn-block q3" data-id="4" id="q3op4">No.</button>
+                <button class="btn btn-danger btn-block q3 option" data-id="4" id="q3op4">No.</button>
                 <br>
             </div>
             <div class="question hidden" id="q4">
                 <p>Are you avaliable on Sunday, 2/11, from 4:30 P.M. - 8:30 P.M.?</p>
-                <button class="btn btn-success btn-block q4" data-id="1" id="q4op1">Yes.</button>
+                <button class="btn btn-success btn-block q4 option" data-id="1" id="q4op1">Yes.</button>
                 <br>
-                <button class="btn btn-warning btn-block q4" data-id="2" id="q4op2">I can only attend partially.</button>
+                <button class="btn btn-warning btn-block q4 option" data-id="2" id="q4op2">I can only attend partially.</button>
                 <br>
-                <button class="btn btn-warning btn-block q4" data-id="3" id="q4op3">I don't know yet.</button>
+                <button class="btn btn-warning btn-block q4 option" data-id="3" id="q4op3">I don't know yet.</button>
                 <br>
-                <button class="btn btn-danger btn-block q4" data-id="4" id="q4op4">No.</button>
+                <button class="btn btn-danger btn-block q4 option" data-id="4" id="q4op4">No.</button>
+                <br>
+            </div>
+            <div class="question hidden" id="done">
+                <h3>That's It!</h3>
+                <p>Submit your response below or go back to another question.</p>
                 <br>
             </div>
             <div class="progress" style="height: 2px;">
-                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar" id="progress" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <br>
             <button id="submit" class="btn btn-primary btn-block" disabled>Submit</button>
@@ -105,14 +110,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script>
-    var data = {answer:{}};
-    $(".q1").click(function() {
-        var option = parseInt($(this).attr("data-id"));
-        data.answer.q1 = option;
-        $("#q1").fadeOut(500);
-        $("#q2").removeClass("hidden");
-        console.log(data);
-    });
+        /* global $ */
+        var data = { answer: {} };
+        var current = 1;
+        $(".option").click(function() {
+            setProgress(current * 25);
+            current += 1;
+            var option = parseInt($(this).attr("data-id"), 10);
+            data.answer["q" + current] = option;
+            if (current === 4) {
+                $("#q4").fadeOut(500, function() {
+                $("#done").removeClass("hidden");
+            });
+            } else {
+                $("#q" + current).fadeOut(500, function() {
+                $("#q" + (current + 1)).removeClass("hidden");
+            });
+            }
+
+            console.log(data);
+        });
+        
+
+        function setProgress(amt) {
+            $("#progress").attr('aria-valuenow', amt);
+            $("#progress").css('width', amt + '%');
+        }
     </script>
 </body>
 
