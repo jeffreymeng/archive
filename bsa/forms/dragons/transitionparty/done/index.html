@@ -31,8 +31,8 @@
             <nav class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item"><a href="/bsa/">BSA</a></li>
-                <li class="breadcrumb-item"><a href="/bsa/forms/">Forms</a></li>
-                <li class="breadcrumb-item"><a href="/bsa/forms/dragons/">Dragons</a></li>
+                <li class="breadcrumb-item">Forms</li>
+                <li class="breadcrumb-item">Dragons</li>
                 <span class="breadcrumb-item active">Transition Party</span>
             </nav>
 
@@ -42,8 +42,9 @@
                 <hr>
                 <h3>Data submitted</h3>
                 <p>Your data was submitted. <a data-toggle="collapse" href="#advancedCollapse" aria-expanded="false" aria-controls="advancedCollapse">
-    Advanced
+    Advanced.
   </a></p>
+
 
                 <div class="collapse" id="advancedCollapse">
                     <div class="card card-body" id="advanced">
@@ -52,7 +53,8 @@
                 </div>
                 <br>
             </div>
-
+            <hr>
+            <h3>Responses</h3>
 
         </div>
     </div>
@@ -76,7 +78,7 @@
         }
         $("#advanced").html(
             "<p><b>Operation Complete</b>: " + getQuery("operationComplete") +
-            "<br><b>Data</b>: " + atob(getQuery("data"))+ 
+            "<br><b>Data</b>: " + atob(getQuery("data")) +
             "</p>"
         );
     </script>
