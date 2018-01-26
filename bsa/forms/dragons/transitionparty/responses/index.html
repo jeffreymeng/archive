@@ -155,13 +155,15 @@
             for (var key in results) {
                 var accordionText = "";
                 if (final.hasOwnProperty(key)) {
+                    console.log(key)
                     for (var key2 in results[key])
-                    
+                    console.log(key2)
                     accordionText += "<b>Submitted: " + results[key][key2].end + "</b>" + 
                     "<b>Friday, 2/2, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q1] +
                     "<b>Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q2] +
                     "<b>Sunday, 2/4, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q3] +
                     "<b>Friday, 2/9, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q4] + "<hr>";
+                    console.log(accordionText)
                     
                 }
                 $("#accordion").append(getAccordionComponent(captializeName(key), accordionText));
