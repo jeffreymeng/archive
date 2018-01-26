@@ -103,28 +103,28 @@
                     <div class="card-body">
                         <canvas id="c1" width="400" height="400"></canvas>
                     </div>
-                    
+
                 </div>
                 <b>Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.</b>
                 <div class="card">
                     <div class="card-body">
                         <canvas id="c2" width="400" height="400"></canvas>
                     </div>
-                    
+
                 </div>
                 <b>Sunday, 2/4, from 4:30 P.M. - 8:30 P.M.</b>
                 <div class="card">
                     <div class="card-body">
                         <canvas id="c3" width="400" height="400"></canvas>
                     </div>
-                    
+
                 </div>
                 <b>Friday, 2/9, from 4:30 P.M. - 8:30 P.M.</b>
                 <div class="card">
                     <div class="card-body">
                         <canvas id="c4" width="400" height="400"></canvas>
                     </div>
-                    
+
                 </div>
 
             </div>
@@ -218,7 +218,11 @@
 
                 },
                 options: {
-                    responsive:false
+                    responsive: false,
+                    title: {
+                        display: true,
+                        text: 'Friday, 2/2, from 4:30 P.M. - 8:30 P.M.'
+                    }
                 }
             });
             var pc2 = new Chart(c2, {
@@ -241,7 +245,13 @@
                     ],
 
                 },
-                options: {}
+                options: {
+                    responsive: false,
+                    title: {
+                        display: true,
+                        text: 'Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.'
+                    }
+                }
             });
             var pc3 = new Chart(c3, {
                 type: 'pie',
@@ -263,7 +273,13 @@
                     ],
 
                 },
-                options: {}
+                options: {
+                    responsive: false,
+                    title: {
+                        display: true,
+                        text: 'Suday, 2/4, from 4:30 P.M. - 8:30 P.M.'
+                    }
+                }
             });
             var pc4 = new Chart(c4, {
                 type: 'pie',
@@ -285,7 +301,13 @@
                     ],
 
                 },
-                options: {}
+                options: {
+                    responsive: false,
+                    title: {
+                        display: true,
+                        text: 'Friday, 2/9, from 4:30 P.M. - 8:30 P.M.'
+                    }
+                }
             });
             $("#loader").addClass("hidden");
             $("#content").removeClass("hidden");
