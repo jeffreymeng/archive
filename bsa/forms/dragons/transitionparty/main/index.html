@@ -113,35 +113,49 @@
         /* global $ */
         var data = { answer: {} };
         var current = 0;
-        $("#back").click(function(){
-            current -= 1; 
+        $("#back").click(function() {
+            current -= 1;
+            setProgress(current * 25);
+            if (current === 3) {
+                $("#done").fadeOut(500, function() {
+                    $("#q4").removeClass("hidden");
+                });
+            }
+            else {
+                $("#q" + (current + 1)).fadeOut(500, function() {
+                    $("#q" + current).removeClass("hidden");
+                });
+            }
+
+            $("#submit").attr("disabled", "");
         });
         $(".option").click(function() {
             current += 1;
             setProgress(current * 25);
-            
+
             var option = parseInt($(this).attr("data-id"), 10);
             data.answer["q" + current] = option;
-            
+
             if (current === 4) {
                 $("#q4").fadeOut(500, function() {
-                $("#done").removeClass("hidden");
-                $("#submit").removeAttr("disabled");
-            });
-            } else {
-                console.log(current);
-            console.log("#q" + current);
-            console.log("#q" + (current + 1));
-                $("#q" + current).fadeOut(500, function() {
-                $("#q" + (current + 1)).removeClass("hidden");
-            });
+                    $("#done").removeClass("hidden");
+                    $("#submit").removeAttr("disabled");
+                });
             }
-            
-            
+            else {
+                console.log(current);
+                console.log("#q" + current);
+                console.log("#q" + (current + 1));
+                $("#q" + current).fadeOut(500, function() {
+                    $("#q" + (current + 1)).removeClass("hidden");
+                });
+            }
+
+
 
             console.log(data);
         });
-        
+
 
         function setProgress(amt) {
             $("#progress").attr('aria-valuenow', amt);
