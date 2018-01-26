@@ -16,7 +16,11 @@
     <script src="/fontawesome/js/fontawesome.min.js"></script>
 
     <title>Boy Scout Trips - Jeffrey Archives</title>
-
+<style>
+        .hidden {
+            display:none;
+        }
+    </style>
 </head>
 
 <body>
@@ -40,7 +44,7 @@
                     <button class="btn btn-primary" id="back">Back</button>
                 </div>
             </div>
-            <div class="question" id="q1">
+            <div class="question " id="q1">
                 <p>Are you avaliable on Friday, 2/2, from 4:30 P.M. - 8:30 P.M.?</p>
                 <button class="btn btn-success btn-block q1" data-id="1" id="q1op1">Yes.</button>
                 <br>
@@ -51,7 +55,7 @@
                 <button class="btn btn-danger btn-block q1" data-id="4" id="q1op4">No.</button>
                 <br>
             </div>
-            <div class="question" id="q2">
+            <div class="question hidden" id="q2">
                 <p>Are you avaliable on Friday, 2/9, from 4:30 P.M. - 8:30 P.M.?</p>
                 <button class="btn btn-success btn-block q2" data-id="1" id="q2op1">Yes.</button>
                 <br>
@@ -62,7 +66,7 @@
                 <button class="btn btn-danger btn-block q2" data-id="4" id="q2op4">No.</button>
                 <br>
             </div>
-            <div class="question" id="q3">
+            <div class="question hidden" id="q3">
                 <p>Are you avaliable on Saturday, 2/10, from 4:30 P.M. - 8:30 P.M.?</p>
                 <button class="btn btn-success btn-block q3" data-id="1" id="q3op1">Yes.</button>
                 <br>
@@ -73,7 +77,7 @@
                 <button class="btn btn-danger btn-block q3" data-id="4" id="q3op4">No.</button>
                 <br>
             </div>
-            <div class="question" id="q4">
+            <div class="question hidden" id="q4">
                 <p>Are you avaliable on Sunday, 2/11, from 4:30 P.M. - 8:30 P.M.?</p>
                 <button class="btn btn-success btn-block q4" data-id="1" id="q4op1">Yes.</button>
                 <br>
@@ -105,8 +109,8 @@
     $(".q1").click(function() {
         var option = parseInt($(this).attr("data-id"));
         data.answer.q1 = option;
-        $("#q1").fadeOut(300);
-        $("#q2").fadeIn(300);
+        $("#q1").fadeOut(500);
+        $("#q2").removeClass("hidden");
         console.log(data);
     });
     </script>
