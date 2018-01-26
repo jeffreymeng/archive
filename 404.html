@@ -49,6 +49,8 @@
         var path = window.location.pathname.substring(1).split("/");
         if (path.length > 1) {
             for (var i = 0; i < (path.length - 1)/*dosent loop through the last one*/; i ++) {
+                console.log(i);
+                console.log(path[i])
                 $('<li class="breadcrumb-item" id="breadcrumb-first"><a href="' + path.splice(0, i + 1).join("/") + '">' + path[i] + '</a></li>').insertBefore("#breadcrumb-last");
             }
             $("#breadcrumb-last").text(path[path.length - 1]);//last element
