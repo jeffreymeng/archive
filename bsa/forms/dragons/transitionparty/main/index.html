@@ -115,7 +115,7 @@
         var current = 1;
         $(".option").click(function() {
             setProgress(current * 25);
-            current += 1;
+            
             var option = parseInt($(this).attr("data-id"), 10);
             data.answer["q" + current] = option;
             if (current === 4) {
@@ -127,6 +127,8 @@
                 $("#q" + (current + 1)).removeClass("hidden");
             });
             }
+            
+            current += 1;
 
             console.log(data);
         });
