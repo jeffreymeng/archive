@@ -16,7 +16,7 @@
     <script src="/fontawesome/js/fontawesome.min.js"></script>
 
     <title>Boy Scout Trips - Jeffrey Archives</title>
-    
+
 </head>
 
 <body>
@@ -37,7 +37,7 @@
                 <label for="name">What is your name?</label>
                 <input type="text" id="name" class="form-control">
                 <p class="text-danger" id="name-help"></p>
-                <button class="btn btn-primary btn-block" id="enter" >Enter Form</button>
+                <button class="btn btn-primary btn-block" id="enter">Enter Form</button>
             </div>
         </div>
     </div>
@@ -50,14 +50,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script>
+    /* global $ atob btoa*/
         $("#name").keyup(function(e) {
-            
+
             if (e.which == 13) {
                 $("#enter").click();
             }
-        })
+        });
         $("#enter").click(function() {
-            var names = JSON.parse(atob("WyJqYWNvYiBuaWUiLCJyaWNoYXJkIGxpdSIsImplZmZyZXkgbWVuZyIsImJyYW5kb24geXVhbiIsImRhbmllbCBsaW4iLCJqb25hdGhhbiB6aG91IiwibWF4IGxpYW4iLCJqYXNvbiBjaGVuIiwic2FtdWVsIHlhbyIsImxhbmRvbiB5YW5nIiwidGlhbnlpIGd1YW4iXQ"));
+            var names = JSON.parse(atob("WyJqYWNvYiBuaWUiLCJyaWNoYXJkIGxpdSIsImplZmZyZXkgbWVuZyIsImJyYW5kb24g" +
+                "eXVhbiIsImRhbmllbCBsaW4iLCJqb25hdGhhbiB6aG91IiwibWF4IGxpYW4iLCJqYXNvbiBjaGVuIiwic2FtdWVsIHlhbyIsImxhbmRvbiB5YW5nIiwidGlhbnlpIGd1YW4iXQ"));
             var nameInput = $("#name").val();
             var fullNameRegex = new RegExp("([A-Za-z]){2,} ([A-Za-z]){2,}");
             var match = fullNameRegex.exec(nameInput);

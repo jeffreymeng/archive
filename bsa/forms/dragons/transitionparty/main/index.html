@@ -113,6 +113,9 @@
         /* global $ */
         var data = { answer: {} };
         var current = 0;
+        $("#back").click(function(){
+            current -= 1; 
+        });
         $(".option").click(function() {
             current += 1;
             setProgress(current * 25);
