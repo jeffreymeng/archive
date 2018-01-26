@@ -57,7 +57,7 @@
                     <div class="card-body">
                         <h5 class="card-title">By Person</h5>
                         <div id="accordion" id="accordion">
-                            
+
                         </div>
                     </div>
 
@@ -142,7 +142,7 @@
                 r2 = [0, 0, 0, 0],
                 r3 = [0, 0, 0, 0],
                 r4 = [0, 0, 0, 0];
-            var responseText = ["Can attend the whole time", "Can attend only partially", "Dones not know yet", "Can not attend"]
+            var responseText = ["Can attend the whole time", "Can attend only partially", "Does not know yet", "Can not attend"]
             for (var key in final) {
                 if (final.hasOwnProperty(key)) {
                     //console.log(key + " -> " + data[key]);
@@ -156,15 +156,18 @@
                 var accordionText = "";
                 if (final.hasOwnProperty(key)) {
                     console.log(key)
-                    for (var key2 in results[key])
-                    console.log(key2)
-                    accordionText += "<b>Submitted: " + results[key][key2].end + "</b>" + 
-                    "<b>Friday, 2/2, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q1] +
-                    "<b>Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q2] +
-                    "<b>Sunday, 2/4, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q3] +
-                    "<b>Friday, 2/9, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q4] + "<hr>";
-                    console.log(accordionText)
-                    
+                    for (var key2 in results[key]) {
+                        if (final.hasOwnProperty(key)) {
+                            console.log(key2);
+                            accordionText += "<b>Submitted: " + results[key][key2].end + "</b>" +
+                                "<b>Friday, 2/2, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q1] +
+                                "<b>Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q2] +
+                                "<b>Sunday, 2/4, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q3] +
+                                "<b>Friday, 2/9, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q4] + "<hr>";
+                        }
+                    }
+                    console.log(accordionText);
+
                 }
                 $("#accordion").append(getAccordionComponent(captializeName(key), accordionText));
             }
