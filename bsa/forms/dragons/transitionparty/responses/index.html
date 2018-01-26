@@ -161,12 +161,13 @@
                     r4[data[key].answer.q4] += 1;
                 }
             }
+            console.log([r1, r2, r3, r4]);
             var c1 = $("#c1");
             var c2 = $("#c2");
             var c3 = $("#c3");
             var c4 = $("#c4");
 
-            var pc1 = new Chart(ctx, {
+            var pc1 = new Chart(c1, {
                 type: 'pie',
                 data: {
                     datasets: [{
