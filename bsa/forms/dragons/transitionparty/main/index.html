@@ -190,6 +190,7 @@
             if (current === 4) {
                 $("#q4").fadeOut(500, function() {
                     $("#done").removeClass("hidden");
+                    $("#q" + (current + 1)).fadeIn(0);
                     $("#submit").removeAttr("disabled");
                 });
             }
