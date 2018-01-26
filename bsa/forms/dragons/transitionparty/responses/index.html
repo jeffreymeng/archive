@@ -181,7 +181,13 @@
                 type: 'pie',
                 data: {
                     datasets: [{
-                        data: r1
+                        data: r1,
+                        backgroundColor: [
+                            window.chartColors.green,
+                            window.chartColors.yellow,
+                            window.chartColors.blue,
+                            window.chartColors.red
+                        ]
                     }],
                     labels: [
                         "Can attend fully",
@@ -189,12 +195,7 @@
                         "Don not know yet",
                         "Can not attend"
                     ],
-                    backgroundColor: [
-                        window.chartColors.green,
-                        window.chartColors.yellow,
-                        window.chartColors.blue,
-                        window.chartColors.red
-                    ]
+
                 },
                 options: {}
             });
