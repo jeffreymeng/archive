@@ -22,14 +22,12 @@
             <!--<p class="text-muted">Welcome to the Jeffrey Archives</p>-->
             <nav class="breadcrumb">
                 <li class="breadcrumb-item" id="breadcrumb-first"><a href="/">Home</a></li>
-                
+
                 <span class="breadcrumb-item active" id="breadcrumb-last">404</span>
             </nav>
             <b>Page not found!</b>
-            <p>The requested resource does not currently exist at this location. <br>
-            It may have been moved or deleted(also check your spelling!).<br>
-            You may want to go to the <a href="/">Home Page</a> and select a link from there.<br>
-            <a href="/">Click here to return to the home page.</a></p>
+            <p>The requested resource does not currently exist at this location. <br> It may have been moved or deleted(also check your spelling!).<br> You may want to go to the <a href="/">Home Page</a> and select a link from there.<br>
+                <a href="/">Click here to return to the home page.</a></p>
 
 
 
@@ -45,20 +43,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script>
-    /* global $ */
+        /* global $ */
         var path = window.location.pathname.substring(1).split("/");
+        if (path[path.length - 1] = "") {
+            path.pop();
+        }
         console.log(path);
         if (path.length > 1) {
-            for (var i = 0; i < (path.length - 1)/*dosent loop through the last one*/; i ++) {
+            for (var i = 0; i < (path.length - 1) /*dosent loop through the last one*/ ; i++) {
                 console.log(i);
                 console.log(path[i]);
                 var modifiedPath = path.splice(0, i + 1).join("/");
                 path = window.location.pathname.substring(1).split("/");
+                if (path[path.length - 1] = "") {
+                    path.pop();
+                }
                 $('<li class="breadcrumb-item" id="breadcrumb-first"><a href="/' + modifiedPath + '">' + path[i] + '</a></li>').insertBefore("#breadcrumb-last");
             }
-            $("#breadcrumb-last").text(path[path.length - 1]);//last element
-        } else {
-           $("#breadcrumb-last").text(path[0]); 
+            $("#breadcrumb-last").text(path[path.length - 1]); //last element
+        }
+        else {
+            $("#breadcrumb-last").text(path[0]);
         }
     </script>
 </body>
