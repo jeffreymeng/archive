@@ -16,7 +16,11 @@
     <script src="/fontawesome/js/fontawesome.min.js"></script>
 
     <title>Boy Scout Trips - Jeffrey Archives</title>
-
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,11 +38,14 @@
 
             <div id="content">
                 <h1>Transition Party Survey</h1>
-                <label for="name">What is your name?</label>
-                <input type="text" id="name" class="form-control">
-                <p class="text-danger" id="name-help"></p>
-                <button class="btn btn-primary btn-block" id="enter">Enter Form</button>
+                <p class="text-muted"><i class="fas fa-info-circle"></i> Your current URL can only be used to submit this form once. All future submissions will overwrite the previous submissions. Do not share your url.</p>
+                <hr>
+                <h3>Responses</h3>
+                
+                
             </div>
+
+
         </div>
     </div>
     <div class="footer">
@@ -49,35 +56,27 @@
     <script src="/js/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/chart.min.js"></script>
     <script>
-    /* global $ atob btoa*/
-        $("#name").keyup(function(e) {
-
-            if (e.which == 13) {
-                $("#enter").click();
-            }
-        });
-        $("#enter").click(function() {
-            var names = JSON.parse(atob("WyJqYWNvYiBuaWUiLCJyaWNoYXJkIGxpdSIsImplZmZyZXkgbWVuZyIsImJyYW5kb24g" +
-                "eXVhbiIsImRhbmllbCBsaW4iLCJqb25hdGhhbiB6aG91IiwibWF4IGxpYW4iLCJqYXNvbiBjaGVuIiwic2FtdWVsIHlhbyIsImxhbmRvbiB5YW5nIiwidGlhbnlpIGd1YW4iXQ"));
-            var nameInput = $("#name").val().trim();
-            var fullNameRegex = new RegExp("([A-Za-z]){2,} ([A-Za-z]){2,}");
-            var match = fullNameRegex.exec(nameInput);
-            if (match == null) {
-
-                // No match
-                $("#name-help").html("Enter your first and last name, as it appears in the T485 Directory spreadsheet.");
-            }
-            else if (names.indexOf(nameInput.toLowerCase()) > -1) {
-                window.location.href = "form/?key=" + encodeURIComponent(btoa(nameInput.toLowerCase()));
-                
-            }
-            else {
-                $("#name-help").html("You must be a current member of the Dragons patrol to fill out this form. Make sure your name exactly matches the one on the spreadsheet(case insensitive).");
-
-            }
-        });
+        function getQuery(name) {
+            var url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+        $("#advanced").html(
+            "<p><b>Operation Complete</b>: " + getQuery("operationComplete") +
+            "<br><b>Data</b>: " + atob(getQuery("data"))+ 
+            "</p>"
+        );
+        
     </script>
+
+
+
 </body>
 
 </html>

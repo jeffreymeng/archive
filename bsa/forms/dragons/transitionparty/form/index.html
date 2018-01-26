@@ -24,6 +24,24 @@
 </head>
 
 <body>
+    <script>
+        //http://stackoverflow.com/a/901144/5511561
+        function getQuery(name) {
+            var url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        if (!(JSON.parse(atob("WyJqYWNvYiBuaWUiLCJyaWNoYXJkIGxpdSIsImplZmZyZXkgbWVuZyIsImJyYW5kb24g" +
+                "eXVhbiIsImRhbmllbCBsaW4iLCJqb25hdGhhbiB6aG91IiwibWF4IGxpYW4iLCJqYXNvbiBjaGVuIiwic2FtdWVsIH" +
+                "lhbyIsImxhbmRvbiB5YW5nIiwidGlhbnlpIGd1YW4iXQ")).indexOf(atob(getQuery("key"))) > -1)) {
+            window.location.href = "/bsa/forms/dragons/transitionparty/";
+        }
+    </script>
     <div class="container">
         <div class="col-lg-12">
             <h1>Jeffrey Scouting Archives</h1>
@@ -134,16 +152,7 @@
         /* global $ atob btoa*/
 
 
-        //http://stackoverflow.com/a/901144/5511561
-        function getQuery(name) {
-            var url = window.location.href;
-            name = name.replace(/[\[\]]/g, "\\$&");
-            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, " "));
-        }
+
         var name = atob(getQuery("key"));
 
         var data = { answer: {}, name: name, start: Date() };
