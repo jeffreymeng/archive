@@ -111,6 +111,19 @@
     <script src="/js/bootstrap.min.js"></script>
     <script>
         /* global $ */
+
+
+        //http://stackoverflow.com/a/901144/5511561
+        function getQuery(name) {
+            var url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+        var name = atob(decodeURIComponent(getQuery("name")));
         var data = { answer: {} };
         var current = 0;
         $("#back").click(function() {
@@ -122,7 +135,7 @@
                 });
             }
             else {
-                 console.log(current);
+                console.log(current);
                 console.log("#q" + (current + 2));
                 console.log("#q" + (current + 1));
                 $("#q" + (current + 2)).fadeOut(500, function() {
@@ -166,6 +179,9 @@
             $("#progress").attr('aria-valuenow', amt);
             $("#progress").css('width', amt + '%');
         }
+        $("#submit").click(function(){
+            alert("Hi!");
+        })
     </script>
 </body>
 
