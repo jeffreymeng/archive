@@ -144,7 +144,7 @@
             if (!results[2]) return '';
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
-        var name = atob(decodeURIComponent(getQuery("name")));
+        var name = atob(getQuery("key"));
 
         var data = { answer: {}, name: name, start: Date() };
         var current = 0;
