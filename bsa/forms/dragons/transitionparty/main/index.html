@@ -41,7 +41,7 @@
                 <p class="text-muted"><i class="fas fa-info-circle"></i> Your current URL can only be used to submit this form once. All future submissions will overwrite the previous submissions. Do not share your url.</p>
                 <hr>
                 <div class="text-center">
-                    <button class="btn btn-primary" id="back">Back</button>
+                    <button class="btn btn-primary" id="back" disabled>Back</button>
                 </div>
             </div>
             <div class="question " id="q1">
@@ -93,6 +93,12 @@
                 <p>Submit your response below or go back to another question.</p>
                 <br>
             </div>
+            <div class="question hidden" id="sumbitting">
+                <h3>Loading</h3>
+                <p>Do not close this tab of your data will not go through.</p>
+                <br>
+            </div>
+            
             <div class="progress" style="height: 2px;">
                 <div class="progress-bar" id="progress" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
@@ -139,10 +145,17 @@
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
         var name = atob(decodeURIComponent(getQuery("name")));
-        var data = { answer: {} };
+
+        var data = { answer: {}, name: name, start: Date() };
         var current = 0;
         $("#back").click(function() {
             current -= 1;
+            if (current > 0) {
+                $("#back").removeAttr("disabled");
+            }
+            else {
+                $("#back").attr("disabled", "");
+            }
             setProgress(current * 25);
             if (current === 3) {
                 $("#done").fadeOut(500, function() {
@@ -168,7 +181,12 @@
 
             var option = parseInt($(this).attr("data-id"), 10);
             data.answer["q" + current] = option;
-
+            if (current > 0) {
+                $("#back").removeAttr("disabled");
+            }
+            else {
+                $("#back").attr("disabled", "");
+            }
             if (current === 4) {
                 $("#q4").fadeOut(500, function() {
                     $("#done").removeClass("hidden");
@@ -195,9 +213,29 @@
             $("#progress").attr('aria-valuenow', amt);
             $("#progress").css('width', amt + '%');
         }
+        data.end = Date();
+        var set1 = false;;
+        var set2 = false;
         $("#submit").click(function() {
-            alert("Hi!");
-        })
+            firebase.database().ref("/archive/bsa/dragons/transitionparty/results/" + name + "/").push(data).then(function() {
+                set1 = true;
+                if (set2) {
+                    window.location.href = "/bsa/forms/dragons/transitionparty/done/?data=" + encodeURIComponent(bota(JSON.stringify(data))) + "&operationComplete=" + Date();
+                }
+            }).catch(function(error) {
+                alert("An unknown error occured. Please try again.");
+                window.location.href = window.location.href;
+            });
+            firebase.database().ref("/archive/bsa/dragons/transitionparty/finalperperson/" + name + "/").set(data).then(function() {
+                set2 = true;
+                if (set1) {
+                    window.location.href = "/bsa/forms/dragons/transitionparty/done/?data=" + encodeURIComponent(bota(JSON.stringify(data))) + "&operationComplete=" + Date();
+                }
+            }).catch(function() {
+                alert("An unknown error occured. Please try again.");
+                window.location.href = window.location.href;
+            });
+        });
     </script>
 </body>
 
