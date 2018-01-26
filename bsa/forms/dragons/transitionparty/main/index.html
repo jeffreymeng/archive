@@ -122,6 +122,9 @@
                 });
             }
             else {
+                 console.log(current);
+                console.log("#q" + (current + 2));
+                console.log("#q" + (current + 1));
                 $("#q" + (current + 2)).fadeOut(500, function() {
                     $("#q" + (current + 1)).removeClass("hidden");
                 });
