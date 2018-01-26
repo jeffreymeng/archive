@@ -220,7 +220,7 @@
             firebase.database().ref("/archive/bsa/dragons/transitionparty/results/" + name + "/").push(data).then(function() {
                 set1 = true;
                 if (set2) {
-                    window.location.href = "/bsa/forms/dragons/transitionparty/done/?data=" + encodeURIComponent(bota(JSON.stringify(data))) + "&operationComplete=" + Date();
+                    window.location.href = "/bsa/forms/dragons/transitionparty/done/?data=" + encodeURIComponent(bota(JSON.stringify(data))) + "&operationComplete=" + encodeURIComponent(Date());
                 }
             }).catch(function(error) {
                 alert("An unknown error occured. Please try again.");
@@ -229,7 +229,7 @@
             firebase.database().ref("/archive/bsa/dragons/transitionparty/finalperperson/" + name + "/").set(data).then(function() {
                 set2 = true;
                 if (set1) {
-                    window.location.href = "/bsa/forms/dragons/transitionparty/done/?data=" + encodeURIComponent(bota(JSON.stringify(data))) + "&operationComplete=" + Date();
+                    window.location.href = "/bsa/forms/dragons/transitionparty/done/?data=" + encodeURIComponent(bota(JSON.stringify(data))) + "&operationComplete=" + encodeURIComponent(Date());
                 }
             }).catch(function() {
                 alert("An unknown error occured. Please try again.");

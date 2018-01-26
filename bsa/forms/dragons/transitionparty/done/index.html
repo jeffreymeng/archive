@@ -41,12 +41,20 @@
                 <p class="text-muted"><i class="fas fa-info-circle"></i> Your current URL can only be used to submit this form once. All future submissions will overwrite the previous submissions. Do not share your url.</p>
                 <hr>
                 <h3>Data submitted</h3>
-                <p>Submit your response below or go back to another question.</p>
+                <p>Your data was submitted. <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="advancedCollapse">
+    Advanced
+  </a></p>
+
+                <div class="collapse" id="advancedCollapse">
+                    <div class="card card-body" id="advanced">
+
+                    </div>
+                </div>
                 <br>
             </div>
 
 
-    </div>
+        </div>
     </div>
     <div class="footer">
         <div class="footer-content text-center">
@@ -56,9 +64,24 @@
     <script src="/js/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script>
+        function getQuery(name) {
+            var url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+        $("#advanced").html(
+            "<b>Operation Complete</b>: " + getQuery("operationComplete") +
+            "<b>Data</b>: " + JSON.stringify(atob(getQuery("data")))
+        );
+    </script>
 
 
-   
+
 </body>
 
 </html>
