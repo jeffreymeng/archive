@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Jeffrey Meng">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/fontawesome/css/fa-svg-with-js.css">
+    <script src="/fontawesome/js/fa-solid.min.js"></script>
+    <script src="/fontawesome/js/fontawesome.min.js"></script>
+
+    <title>Boy Scout Trips - Jeffrey Archives</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-lg-12">
+            <h1>Jeffrey Scouting Archives</h1>
+            <!--<p class="text-muted">Welcome to the Jeffrey Archives</p>-->
+            <nav class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/bsa/">BSA</a></li>
+                <li class="breadcrumb-item">Forms</li>
+                <li class="breadcrumb-item">Dragons</li>
+                <span class="breadcrumb-item active">Transition Party</span>
+            </nav>
+
+            <div id="content" class="">
+                <h1>Transition Party Survey</h1>
+                <p class="text-muted"><i class="fas fa-info-circle"></i> Your current URL can only be used to submit this form once. All future submissions will overwrite the previous submissions. Do not share your url.</p>
+                <hr>
+                <h3>Responses</h3>
+                <div class="card">
+
+                    <div class="card-body">
+                        <h5 class="card-title">By Question</h5><br>
+                        <canvas id="c1" width="400" height="400"></canvas>
+                        <canvas id="c2" width="400" height="400"></canvas>
+                        <canvas id="c3" width="400" height="400"></canvas>
+                        <canvas id="c4" width="400" height="400"></canvas>
+                    </div>
+
+                </div>
+                <h3>Responses by Person</h3>
+                <p>If a person has mutiple responses, only the most recent submission will be counted(above and in the final counting).</p>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">By Person</h5>
+                        <div id="accordion" id="accordion">
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-content text-center">
+            Copyright &copy; 2017-2018 Jeffrey Meng
+        </div>
+    </div>
+    <script src="/js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/chart.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDSCVcPcMzCXMjGhQvQJfkgnjCFzzewTgA",
+            authDomain: "jmeng.firebaseapp.com",
+            databaseURL: "https://jmeng.firebaseio.com",
+            projectId: "project-4679594405675385181",
+            storageBucket: "project-4679594405675385181.appspot.com",
+            messagingSenderId: "590199481216"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script>
+        /* global $ */
+        var chartColors = {
+            "red": "rgb(255, 99, 132)",
+            "orange": "rgb(255, 159, 64)",
+            "yellow": "rgb(255, 205, 86)",
+            "green": "rgb(75, 192, 192)",
+            "blue": "rgb(54, 162, 235)",
+            "purple": "rgb(153, 102, 255)",
+            "grey": "rgb(201, 203, 207)"
+        };
+
+        function captializeName(str) {
+            return str.replace(/\w\S*/g, function(txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+        }
+
+        //http://stackoverflow.com/a/17606289/5511561s
+        String.prototype.replaceAll = function(search, replacement) {
+            var target = this;
+            return target.replace(new RegExp(search, 'g'), replacement);
+        };
+
+        function getAccordionComponent(title, content) {
+            return '<div class="card">' +
+                '<div class="card-header" id="heading-' + title.replaceAll(" ", "") + '">' +
+                '<h5 class="mb-0">' +
+                '<button class="btn btn-link" data-toggle="collapse" data-target="#collapse' + title.replaceAll(" ", "") + '" aria-expanded="true" aria-controls="collapse' + title.replaceAll(" ", "") + '">' +
+                title +
+                '</button>' +
+                '</h5>' +
+                '</div>' +
+
+                '<div id="collapse' + title.replaceAll(" ", "") + '" class="collapse" aria-labelledby="heading' + title.replaceAll(" ", "") + '" data-parent="#accordion">' +
+                '<div class="card-body">' +
+                content +
+                '</div>' +
+                '</div>' +
+                '</div>';
+        }
+
+        function getQuery(name) {
+            var url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+        firebase.database().ref("/archive/bsa/dragons/transitionparty/").once("value").then(function(snapshot) {
+            var final = snapshot.val().finalperperson;
+            var results = snapshot.val().results;
+            var r1 = [0, 0, 0, 0],
+                r2 = [0, 0, 0, 0],
+                r3 = [0, 0, 0, 0],
+                r4 = [0, 0, 0, 0];
+            var responseText = ["Can attend the whole time", "Can attend only partially", "Does not know yet", "Can not attend"];
+            for (var key in final) {
+                if (final.hasOwnProperty(key)) {
+                    //console.log(key + " -> " + data[key]);
+                    r1[final[key].answer.q1 - 1] += 1;
+                    r2[final[key].answer.q2 - 1] += 1;
+                    r3[final[key].answer.q3 - 1] += 1;
+                    r4[final[key].answer.q4 - 1] += 1;
+                }
+            }
+            for (key in results) {
+                var accordionText = "";
+                if (final.hasOwnProperty(key)) {
+                    console.log(key);
+                    for (var key2 in results[key]) {
+                        if (final.hasOwnProperty(key)) {
+                            console.log(key2);
+                            accordionText = accordionText + "<h6 class='card-subtitle'>Submitted: " + results[key][key2].end + "</h6><br>" +
+                                "<b>Friday, 2/2, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q1 - 1] +
+                                "<br><b>Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q2 - 1] +
+                                "<br><b>Sunday, 2/4, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q3 - 1] +
+                                "<br><b>Friday, 2/9, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q4 - 1] + "<hr>";
+                        }
+                    }
+                    console.log(accordionText);
+
+                }
+                $("#accordion").append(getAccordionComponent(captializeName(key), accordionText));
+            }
+            //charts
+            console.log([r1, r2, r3, r4]);
+            var c1 = $("#c1");
+            var c2 = $("#c2");
+            var c3 = $("#c3");
+            var c4 = $("#c4");
+
+            var pc1 = new Chart(c1, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: r1,
+                        backgroundColor: [
+                            chartColors.green,
+                            chartColors.yellow,
+                            chartColors.blue,
+                            chartColors.red
+                        ]
+                    }],
+                    labels: [
+                        "Can attend fully",
+                        "Can attend partially",
+                        "Don not know yet",
+                        "Can not attend"
+                    ],
+
+                },
+                options: {
+                    responsive: false,
+                    title: {
+                        display: true,
+                        text: 'Friday, 2/2, from 4:30 P.M. - 8:30 P.M.'
+                    }
+                }
+            });
+            var pc2 = new Chart(c2, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: r2,
+                        backgroundColor: [
+                            window.chartColors.green,
+                            window.chartColors.yellow,
+                            window.chartColors.blue,
+                            window.chartColors.red
+                        ]
+                    }],
+                    labels: [
+                        "Can attend fully",
+                        "Can attend partially",
+                        "Don not know yet",
+                        "Can not attend"
+                    ],
+
+                },
+                options: {
+                    responsive: false,
+                    title: {
+                        display: true,
+                        text: 'Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.'
+                    }
+                }
+            });
+            var pc3 = new Chart(c3, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: r3,
+                        backgroundColor: [
+                            window.chartColors.green,
+                            window.chartColors.yellow,
+                            window.chartColors.blue,
+                            window.chartColors.red
+                        ]
+                    }],
+                    labels: [
+                        "Can attend fully",
+                        "Can attend partially",
+                        "Don not know yet",
+                        "Can not attend"
+                    ],
+
+                },
+                options: {
+                    responsive: false,
+                    title: {
+                        display: true,
+                        text: 'Suday, 2/4, from 4:30 P.M. - 8:30 P.M.'
+                    }
+                }
+            });
+            var pc4 = new Chart(c4, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: r4,
+                        backgroundColor: [
+                            window.chartColors.green,
+                            window.chartColors.yellow,
+                            window.chartColors.blue,
+                            window.chartColors.red
+                        ]
+                    }],
+                    labels: [
+                        "Can attend fully",
+                        "Can attend partially",
+                        "Don not know yet",
+                        "Can not attend"
+                    ],
+
+                },
+                options: {
+                    responsive: false,
+                    title: {
+                        display: true,
+                        text: 'Friday, 2/9, from 4:30 P.M. - 8:30 P.M.'
+                    }
+                }
+            });
+
+
+        });
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Jeffrey Meng">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/fontawesome/css/fa-svg-with-js.css">
+    <script src="/fontawesome/js/fa-solid.min.js"></script>
+    <script src="/fontawesome/js/fontawesome.min.js"></script>
+
+    <title>Boy Scout Trips - Jeffrey Archives</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        //http://stackoverflow.com/a/901144/5511561
+        function getQuery(name) {
+            var url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        if (!(JSON.parse(atob("WyJqYWNvYiBuaWUiLCJyaWNoYXJkIGxpdSIsImplZmZyZXkgbWVuZyIsImJyYW5kb24g" +
+                "eXVhbiIsImRhbmllbCBsaW4iLCJqb25hdGhhbiB6aG91IiwibWF4IGxpYW4iLCJqYXNvbiBjaGVuIiwic2FtdWVsIH" +
+                "lhbyIsImxhbmRvbiB5YW5nIiwidGlhbnlpIGd1YW4iXQ")).indexOf(atob(getQuery("key"))) > -1)) {
+            window.location.href = "/bsa/forms/dragons/transitionparty/";
+        }
+    </script>
+    <div class="container">
+        <div class="col-lg-12">
+            <h1>Jeffrey Scouting Archives</h1>
+            <!--<p class="text-muted">Welcome to the Jeffrey Archives</p>-->
+            <nav class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/bsa/">BSA</a></li>
+                <li class="breadcrumb-item">Forms</li>
+                <li class="breadcrumb-item">Dragons</li>
+                <span class="breadcrumb-item active">Transition Party</span>
+            </nav>
+
+            <div id="content">
+                <h1>Transition Party Survey</h1>
+                <p class="text-muted"><i class="fas fa-info-circle"></i> Your current URL can only be used to submit this form once. All future submissions will overwrite the previous submissions. Do not share your url.<br>
+                <i class="fas fa-info-circle"></i> If you leave or reload this page before submitting, your data will not be saved.</p>
+                <hr>
+                <div class="text-center">
+                    <button class="btn btn-primary" id="back" disabled>Back</button>
+                </div>
+            </div>
+            <div class="question " id="q1">
+                <p>Are you avaliable on Friday, 2/2, from 4:30 P.M. - 8:30 P.M.?</p>
+                <button class="btn btn-success btn-block q1 option" data-id="1" id="q1op1">Yes.</button>
+                <br>
+                <button class="btn btn-warning btn-block q1 option" data-id="2" id="q1op2">I can only attend partially.</button>
+                <br>
+                <button class="btn btn-warning btn-block q1 option" data-id="3" id="q1op3">I don't know yet.</button>
+                <br>
+                <button class="btn btn-danger btn-block q1 option" data-id="4" id="q1op4">No.</button>
+                <br>
+            </div>
+            <div class="question hidden" id="q2">
+                <p>Are you avaliable on Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.?</p>
+                <button class="btn btn-success btn-block q2 option" data-id="1" id="q2op1">Yes.</button>
+                <br>
+                <button class="btn btn-warning btn-block q2 option" data-id="2" id="q2op2">I can only attend partially.</button>
+                <br>
+                <button class="btn btn-warning btn-block q2 option" data-id="3" id="q2op3">I don't know yet.</button>
+                <br>
+                <button class="btn btn-danger btn-block q2 option" data-id="4" id="q2op4">No.</button>
+                <br>
+            </div>
+            <div class="question hidden" id="q3">
+                <p>Are you avaliable on Sunday, 2/4, from 4:30 P.M. - 8:30 P.M.?</p>
+                <button class="btn btn-success btn-block q3 option" data-id="1" id="q3op1">Yes.</button>
+                <br>
+                <button class="btn btn-warning btn-block q3 option" data-id="2" id="q3op2">I can only attend partially.</button>
+                <br>
+                <button class="btn btn-warning btn-block q3 option" data-id="3" id="q3op3">I don't know yet.</button>
+                <br>
+                <button class="btn btn-danger btn-block q3 option" data-id="4" id="q3op4">No.</button>
+                <br>
+            </div>
+            <div class="question hidden" id="q4">
+                <p>Are you avaliable on Friday, 2/9, from 4:30 P.M. - 8:30 P.M.?</p>
+                <button class="btn btn-success btn-block q4 option" data-id="1" id="q4op1">Yes.</button>
+                <br>
+                <button class="btn btn-warning btn-block q4 option" data-id="2" id="q4op2">I can only attend partially.</button>
+                <br>
+                <button class="btn btn-warning btn-block q4 option" data-id="3" id="q4op3">I don't know yet.</button>
+                <br>
+                <button class="btn btn-danger btn-block q4 option" data-id="4" id="q4op4">No.</button>
+                <br>
+            </div>
+            <div class="question hidden" id="done">
+                <h3>That's It!</h3>
+                <p>Submit your response below or go back to another question.</p>
+                <br>
+            </div>
+            <div class="question hidden" id="sumbitting">
+                <h3>Loading</h3>
+                <p>Do not close this tab of your data will not go through.</p>
+                <br>
+            </div>
+
+            <div class="progress" style="height: 2px;">
+                <div class="progress-bar" id="progress" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <br>
+            <button id="submit" class="btn btn-primary btn-block" disabled>Submit</button>
+        </div>
+    </div>
+    </div>
+    <div class="footer">
+        <div class="footer-content text-center">
+            Copyright &copy; 2017-2018 Jeffrey Meng
+        </div>
+    </div>
+    <script src="/js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDSCVcPcMzCXMjGhQvQJfkgnjCFzzewTgA",
+            authDomain: "jmeng.firebaseapp.com",
+            databaseURL: "https://jmeng.firebaseio.com",
+            projectId: "project-4679594405675385181",
+            storageBucket: "project-4679594405675385181.appspot.com",
+            messagingSenderId: "590199481216"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script>
+        /* global $ atob btoa*/
+
+
+
+        var name = atob(getQuery("key"));
+
+        var data = { answer: {}, name: name, start: Date() };
+        var current = 0;
+        $("#back").click(function() {
+            current -= 1;
+            if (current > 0) {
+                $("#back").removeAttr("disabled");
+            }
+            else {
+                $("#back").attr("disabled", "");
+            }
+            setProgress(current * 25);
+            if (current === 3) {
+                $("#done").fadeOut(500, function() {
+                    $("#q4").removeClass("hidden");
+                    $("#q4").fadeIn(0);
+                });
+            }
+            else {
+                console.log(current);
+                console.log("#q" + (current + 2));
+                console.log("#q" + (current + 1));
+                $("#q" + (current + 2)).fadeOut(500, function() {
+                    $("#q" + (current + 1)).removeClass("hidden");
+                    $("#q" + (current + 1)).fadeIn(0);
+                });
+            }
+
+            $("#submit").attr("disabled", "");
+        });
+        $(".option").click(function() {
+            current += 1;
+            setProgress(current * 25);
+
+            var option = parseInt($(this).attr("data-id"), 10);
+            data.answer["q" + current] = option;
+            if (current > 0) {
+                $("#back").removeAttr("disabled");
+            }
+            else {
+                $("#back").attr("disabled", "");
+            }
+            if (current === 4) {
+                $("#q4").fadeOut(500, function() {
+                    $("#done").removeClass("hidden");
+                    $("#done").fadeIn(0);
+                    $("#submit").removeAttr("disabled");
+                });
+            }
+            else {
+                console.log(current);
+                console.log("#q" + current);
+                console.log("#q" + (current + 1));
+                $("#q" + current).fadeOut(500, function() {
+                    $("#q" + (current + 1)).removeClass("hidden");
+                    $("#q" + (current + 1)).fadeIn(0);
+                });
+            }
+
+
+
+            console.log(data);
+        });
+
+
+        function setProgress(amt) {
+            $("#progress").attr('aria-valuenow', amt);
+            $("#progress").css('width', amt + '%');
+        }
+
+        $("#submit").click(function() {
+            var set1 = false;
+            var set2 = false;
+            data.end = Date();
+            var doneUrl = "/bsa/forms/dragons/transitionparty/done/?data=" + encodeURIComponent(btoa(JSON.stringify(data, null, 2))) + "&operationComplete=" + encodeURIComponent(Date());
+            firebase.database().ref("/archive/bsa/dragons/patrolcamp/results/" + name + "/").push(data).then(function() {
+                set1 = true;
+                if (set2) {
+                    window.location.href = doneUrl;
+                }
+            }).catch(function(error) {
+                alert("An unknown error occured. Please try again.");
+                console.log(error);
+                //window.location.href = window.location.href;
+            });
+            firebase.database().ref("/archive/bsa/dragons/patrolcamp/finalperperson/" + name + "/").set(data).then(function() {
+                set2 = true;
+                if (set1) {
+                    window.location.href = doneUrl;
+                }
+            }).catch(function(error) {
+                alert("An unknown error occured. Please try again.");
+                console.log(error);
+                //window.location.href = window.location.href;
+            });
+        });
+    </script>
+</body>
+
+</html>
