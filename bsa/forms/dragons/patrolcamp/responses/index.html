@@ -53,7 +53,7 @@
 
                 </div>
                 <h3>Responses by Person</h3>
-                <p>If a person has mutiple responses, only the most recent submission will be counted(above and in the final counting).</p>
+                <p>If a person has multiple responses, only the most recent submission will be counted(above and in the final counting).</p>
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">By Person</h5>
@@ -143,7 +143,7 @@
             if (!results[2]) return '';
             return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
-        firebase.database().ref("/archive/bsa/dragons/transitionparty/").once("value").then(function(snapshot) {
+        firebase.database().ref("/archive/bsa/dragons/patrolcamp/").once("value").then(function(snapshot) {
             var final = snapshot.val().finalperperson;
             var results = snapshot.val().results;
             var r1 = [0, 0, 0, 0],
