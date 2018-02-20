@@ -48,7 +48,6 @@
                         <canvas id="c1" width="400" height="400"></canvas>
                         <canvas id="c2" width="400" height="400"></canvas>
                         <canvas id="c3" width="400" height="400"></canvas>
-                        <canvas id="c4" width="400" height="400"></canvas>
                     </div>
 
                 </div>
@@ -149,7 +148,6 @@
             var r1 = [0, 0, 0, 0],
                 r2 = [0, 0, 0, 0],
                 r3 = [0, 0, 0, 0],
-                r4 = [0, 0, 0, 0];
             var responseText = ["Can attend the whole time", "Can attend only partially", "Does not know yet", "Can not attend"];
             for (var key in final) {
                 if (final.hasOwnProperty(key)) {
@@ -157,7 +155,6 @@
                     r1[final[key].answer.q1 - 1] += 1;
                     r2[final[key].answer.q2 - 1] += 1;
                     r3[final[key].answer.q3 - 1] += 1;
-                    r4[final[key].answer.q4 - 1] += 1;
                 }
             }
             for (key in results) {
@@ -168,10 +165,9 @@
                         if (final.hasOwnProperty(key)) {
                             console.log(key2);
                             accordionText = accordionText + "<h6 class='card-subtitle'>Submitted: " + results[key][key2].end + "</h6><br>" +
-                                "<b>Friday, 2/2, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q1 - 1] +
-                                "<br><b>Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q2 - 1] +
-                                "<br><b>Sunday, 2/4, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q3 - 1] +
-                                "<br><b>Friday, 2/9, from 4:30 P.M. - 8:30 P.M.</b>:" + responseText[results[key][key2].answer.q4 - 1] + "<hr>";
+                                "<b>Weekend of 3/10-3/11</b>:" + responseText[results[key][key2].answer.q1 - 1] +
+                                "<br><b>Weekend of 3/17-3/18</b>:" + responseText[results[key][key2].answer.q2 - 1] +
+                                "<br><b>Weekend of 3/31-4/1</b>:" + responseText[results[key][key2].answer.q3 - 1] +
                         }
                     }
                     console.log(accordionText);
@@ -184,8 +180,12 @@
             var c1 = $("#c1");
             var c2 = $("#c2");
             var c3 = $("#c3");
-            var c4 = $("#c4");
-
+            var labels = [
+                        "Can attend fully",
+                        "Can attend partially",
+                        "Can only come by themselves(without parents)",
+                        "Can not attend"
+                    ];
             var pc1 = new Chart(c1, {
                 type: 'pie',
                 data: {
@@ -198,19 +198,14 @@
                             chartColors.red
                         ]
                     }],
-                    labels: [
-                        "Can attend fully",
-                        "Can attend partially",
-                        "Don not know yet",
-                        "Can not attend"
-                    ],
+                    labels: labels,
 
                 },
                 options: {
                     responsive: false,
                     title: {
                         display: true,
-                        text: 'Friday, 2/2, from 4:30 P.M. - 8:30 P.M.'
+                        text: 'Weekend of 3/10-3/11'
                     }
                 }
             });
@@ -226,19 +221,14 @@
                             window.chartColors.red
                         ]
                     }],
-                    labels: [
-                        "Can attend fully",
-                        "Can attend partially",
-                        "Don not know yet",
-                        "Can not attend"
-                    ],
+                    labels: labels,
 
                 },
                 options: {
                     responsive: false,
                     title: {
                         display: true,
-                        text: 'Saturday, 2/3, from 4:30 P.M. - 8:30 P.M.'
+                        text: 'Weekend of 3/17-3/18?'
                     }
                 }
             });
@@ -254,50 +244,18 @@
                             window.chartColors.red
                         ]
                     }],
-                    labels: [
-                        "Can attend fully",
-                        "Can attend partially",
-                        "Don not know yet",
-                        "Can not attend"
-                    ],
+                    labels: labels,
 
                 },
                 options: {
                     responsive: false,
                     title: {
                         display: true,
-                        text: 'Suday, 2/4, from 4:30 P.M. - 8:30 P.M.'
+                        text: 'Weekend of 3/31-4/1'
                     }
                 }
             });
-            var pc4 = new Chart(c4, {
-                type: 'pie',
-                data: {
-                    datasets: [{
-                        data: r4,
-                        backgroundColor: [
-                            window.chartColors.green,
-                            window.chartColors.yellow,
-                            window.chartColors.blue,
-                            window.chartColors.red
-                        ]
-                    }],
-                    labels: [
-                        "Can attend fully",
-                        "Can attend partially",
-                        "Don not know yet",
-                        "Can not attend"
-                    ],
-
-                },
-                options: {
-                    responsive: false,
-                    title: {
-                        display: true,
-                        text: 'Friday, 2/9, from 4:30 P.M. - 8:30 P.M.'
-                    }
-                }
-            });
+            
 
 
         });
