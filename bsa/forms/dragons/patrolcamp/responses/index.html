@@ -147,7 +147,7 @@
             var results = snapshot.val().results;
             var r1 = [0, 0, 0, 0],
                 r2 = [0, 0, 0, 0],
-                r3 = [0, 0, 0, 0],
+                r3 = [0, 0, 0, 0];
             var responseText = ["Can attend the whole time", "Can attend only partially", "Does not know yet", "Can not attend"];
             for (var key in final) {
                 if (final.hasOwnProperty(key)) {
@@ -176,7 +176,7 @@
                 $("#accordion").append(getAccordionComponent(captializeName(key), accordionText));
             }
             //charts
-            console.log([r1, r2, r3, r4]);
+            console.log([r1, r2, r3]);
             var c1 = $("#c1");
             var c2 = $("#c2");
             var c3 = $("#c3");
