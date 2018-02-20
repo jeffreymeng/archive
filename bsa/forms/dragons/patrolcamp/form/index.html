@@ -176,7 +176,7 @@
         });
         $(".option").click(function() {
             current += 1;
-            setProgress(current * (1/3));
+            setProgress(current * (100/3));
 
             var option = parseInt($(this).attr("data-id"), 10);
             data.answer["q" + current] = option;
