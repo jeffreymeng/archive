@@ -203,12 +203,13 @@
         function passwordHandler() {
             $("#share-url").val("https://archive.jeffkmeng.com/password/checker/#" + encodeURIComponent($("#password").val()));
             if ($("#password").val() == null || $("#password").val() == "") {
-                $("#loading").addClass("hidden");
-                $("#main").removeClass("hidden");
-                return;
-            } else {
                 $("#main").addClass("hidden");
                 $("#loading").removeClass("hidden");
+                return;
+            } else {
+                
+                $("#loading").addClass("hidden");
+                $("#main").removeClass("hidden");
             }
             var result = zxcvbn($("#password").val());
             console.log(result);
