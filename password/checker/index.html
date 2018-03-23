@@ -45,7 +45,7 @@
             <div class="input-group mb-3">
                 <input class="form-control" type="password" placeholder="type a password..." id="password">
                 <div class="input-group-append">
-                    <button class="btn btn-secondary" type="button" title="toggle visibility">
+                    <button class="btn btn-secondary" type="button" title="toggle visibility" id="visibility">
                         <span id="eye">
                             <i class="far fa-eye"></i>
                         </span>
@@ -125,6 +125,10 @@
         function getPrintableNum(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
+        $("#visibility").click(function() {
+            $("#eye").toggleClass("hidden");
+            $("#eye-slash").toggleClass("hidden");
+        })
         $("#password").change(function () {
             var result = zxcvbn($("#password").val());
             console.log(result);
