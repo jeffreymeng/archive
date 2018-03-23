@@ -203,21 +203,22 @@
                         if (result.sequence[i][key] == false || key == "i" || key == "j" || key == "pattern") {
                             //i and j are included in the token
                             //pattern is included in the heading.
-                            //if an attribute is false it's basically nonexistent.
+                            //if an attribute is false it's in the defualt state, and therefore not needed.
                             continue;
                         }
-                        var topush = `<li class="list-group-item"><b>${key}</b>: ${result.sequence[i][key]}</li>`;
-                        if (attrs.length % 2 == 0) {
-                            topush += `<div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>`;
-                        }
-                        if (attrs.length % 3 == 0) {
-                            topush += `<div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>`;
-                        }
-                        if (attrs.length % 4 == 0) {
-                            topush += `<div class="w-100 d-none d-lg-block d-xl-none"><!-- wrap every 4 on lg--></div>`;
-                        }
-                        attrs.push(topush);
+
+                        attrs.push(<li class="list-group-item"><b>${key}</b>: ${result.sequence[i][key]}</li>);
                     }
+                }
+                var breakpoints = "";
+                if (i % 2 == 0) {
+                    breakpoints += `<div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>`;
+                }
+                if (i % 3 == 0) {
+                    breakpoints += `<div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>`;
+                }
+                if (i % 4 == 0) {
+                    breakpoints += `<div class="w-100 d-none d-lg-block d-xl-none"><!-- wrap every 4 on lg--></div>`;
                 }
                 $("#sequences").append(`
                     <div class="card">
@@ -228,6 +229,7 @@
                             </ul>
                         </div>
                     </div>
+                    ${breakpoints}
                 `);
 
             }
