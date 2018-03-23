@@ -71,8 +71,8 @@
                 </div>
 
             </div>
-            <b>Sharing your password stats above WILL allow other people to view your password.<br>
-            If you share the URL https://archive.jeffkmeng.com/password/checker no password or stats will be shared.</b>
+            <b>Sharing your password stats above WILL allow other people to view your password.
+                <br> If you share the URL https://archive.jeffkmeng.com/password/checker no password or stats will be shared.</b>
             <hr>
 
             <div class="card">
@@ -137,7 +137,7 @@
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jeffkmeng.com/zxcvbn/4.4.2/zxcvbn.min.js"></script>
     <script src="https://cdn.jeffkmeng.com/clipboardjs/2.0.0/clipboard.min.js"></script>
-    
+
     <script>
         new ClipboardJS('.btn');
         function roundTo(n, digits) {
@@ -178,11 +178,18 @@
             } else {
                 $("#password").attr("type", "password");
             }
-        })
-        $("#password").keyup(function () {
+        });
+        $(window).on('hashchange', function (e) {
+            $("#password").val(decodeURIComponent(window.location.hash.substring(1)));
+            passwordHandler();
+        });
+        $("#password").keyup(passwordHandler);
+        function passwordHandler() {
+            $("#share-url").val(encodeURIComponent($("#password").val()));
             if ($("#password").val() == null || $("#password").val() == "") {
                 $("#loading").addClass("hidden");
                 $("#main").removeClass("hidden");
+                return;
             } else {
                 $("#main").addClass("hidden");
                 $("#loading").removeClass("hidden");
@@ -228,7 +235,7 @@
                             continue;
                         }
 
-                        attrs.push(<li class="list-group-item"><b>${key}</b>: ${result.sequence[i][key]}</li>);
+                        attrs.push(`<li class="list-group-item"><b>${key}</b>: ${result.sequence[i][key]}</li>`);
                     }
                 }
                 var breakpoints = "";
@@ -257,7 +264,7 @@
 
 
 
-        });</script>
+        }</script>
 </body>
 
 </html>
