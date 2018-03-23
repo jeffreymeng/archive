@@ -169,7 +169,7 @@
             $(".ct-10s").text(result.crack_times_display.online_no_throttling_10_per_second);
             $(".ct-10Ts").text(result.crack_times_display.offline_slow_hashing_1e4_per_second);
             $(".ct-10Bs").text(result.crack_times_display.offline_fast_hashing_1e10_per_second);
-            var feedbackExists;
+            var feedbackExists = false;
             if (result.feedback.warning !== "") {
                 $(".feedback-wrong").text(result.feedback.warning);
                 feedbackExists = true;
@@ -182,6 +182,8 @@
             }
             if (!feedbackExists) {
                 $(".feedback-none").removeClass("hidden");
+            } else {
+                $(".feedback-none").addClass("hidden");
             }
             for (var i = 0; i < result.sequences.length; i++) {
                 var attrs = [];
