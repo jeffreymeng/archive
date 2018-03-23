@@ -58,21 +58,30 @@
                     </button>
                 </div>
             </div>
-            <div class="input-group mb-3" id="share">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Share your password stats:</span>
-                </div>
-                <input type="text" class="form-control" value="https://archive.jeffkmeng.com/password/checker/#password" disabled id="share-url">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" data-clipboard-target="#share-url">
-                        <img height="25" src="https://cdn.jeffkmeng.com/clipboardjs/2.0.0/clippy.svg" alt="copy to clipboard" title="copy to clipboard">
-                    </button>
+            <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="sharing" id="sharing-toggle-btn">
+                Show sharing
+            </a>
+            <div class="collapse" id="sharing">
 
-                </div>
+                <div class="card">
+                    <div class="input-group mb-3" id="share">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Share your password stats:</span>
+                        </div>
+                        <input type="text" class="form-control" value="https://archive.jeffkmeng.com/password/checker/#password" disabled id="share-url">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" data-clipboard-target="#share-url">
+                                <img height="25" src="https://cdn.jeffkmeng.com/clipboardjs/2.0.0/clippy.svg" alt="copy to clipboard" title="copy to clipboard">
+                            </button>
 
+                        </div>
+
+                    </div>
+                    <b>Sharing your password stats above WILL allow other people to view your password.
+                        <br> If you share the URL https://archive.jeffkmeng.com/password/checker no password or stats will be
+                        shared.</b>
+                </div>
             </div>
-            <b>Sharing your password stats above WILL allow other people to view your password.
-                <br> If you share the URL https://archive.jeffkmeng.com/password/checker no password or stats will be shared.</b>
             <hr>
 
             <div class="card">
@@ -169,7 +178,16 @@
         function getPrintableNum(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-
+        var sharingSaysShow = true;
+        $("#sharing-toggle-btn").click(function(){
+            if (sharingSaysShow) {
+                sharingSaysShow = false;
+                $("#sharing-toggle-btn").text("Hide sharing");
+            } else {
+                sharingSaysShow = true;
+                $("#sharing-toggle-btn").text("Show sharing");
+            }
+        })
         $("#visibility").click(function () {
             $("#eye").toggleClass("hidden");
             $("#eye-slash").toggleClass("hidden");
