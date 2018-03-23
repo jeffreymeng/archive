@@ -15,6 +15,11 @@
 
     <script src="/fontawesome/js/fa-regular.min.js"></script>
     <script src="/fontawesome/js/fontawesome.min.js"></script>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,13 +39,13 @@
 
             <p class="text-muted">Powered by zxcvbn (On
                 <a href="https://assets.jeffkmeng.com/library/zxcvbn/">Jeffrey Archives</a>/
-                <a href="https://github.com/dropbox/zxcvbn">Github</a>
+                <a href="https://github.com/dropbox/zxcvbn">Github</a>)
             </p>
             <hr>
             <div class="input-group mb-3">
                 <input class="form-control" type="password" placeholder="type a password..." id="password">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" title="toggle visibility">
+                    <button class="btn btn-secondary" type="button" title="toggle visibility">
                         <span id="eye">
                             <i class="far fa-eye"></i>
                         </span>
@@ -53,10 +58,40 @@
             <hr>
             <div class="card">
                 <div class="card-body">
-                    <b>Password Score:
+                    <p class="text-muted">
+                        Took
+                        <span class="calc-time"></span> ms to calculate.
+                    </p>
+                    <b class="score-text-color" id="score">Password Score:
                         <span class="score-num"></span>
                         <span class="score-text"></span>
                     </b>
+                    <b>Feedback:</b>
+                    <span class="text-danger feedback-wrong"></span>
+                    <span class="text-success feedback-suggestion"></span>
+                    <span class="feedback-none hidden">None.</span>
+                    <hr>
+                    <b>Est. Number of guesses to crack:</b>
+                    <span class="guesses"></span>
+                    (
+                    <span class="guesses_log10"></span> orders of magnitude)
+                    <br>
+                    <b>Crack times</b>:
+                    <br>
+                    <ul>
+                        <li>
+                            <b>Online attack on a service that rate limits password auth attempts(100/hour):</b>
+                            <span class="ct-100hr"></span> seconds</li>
+                        <li>
+                            <b>Online attack on a service where rate limiting is not implemented or bypassed(10/second):</b>
+                            <span class="ct-10s"></span> seconds</li>
+                        <li>
+                            <b>Offline attack using a powerful, multi-core computer to break a slow hash(10 Thousand/second):</b>
+                            <span class="ct-10Tsr"></span> seconds</li>
+                        <li>
+                            <b>Offline attack using a powerful, multi-core computer to break a fast hash(10 Billion/second):</b>
+                            <span class="ct-10Bs"></span> seconds</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -70,7 +105,50 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script>
-        $("#password").change(function () { 
+        function getScoreText(score) {
+            return [
+                "Too guessable: this is a very risky password.",
+                "Very guessable: protection from throttled online attacks only.",
+                "Somewhat guessable: protection from unthrottled online attacks.",
+                "Safely unguessable: moderate protection from even an offline slow-hash scenario.",
+                "Very unguessable: strong protection from the worst offline slow-hash scenarios."
+            ][score]
+        }
+        function getScoreTextClass(score) {
+            return [
+                "text-danger",
+                "text-warning",
+                "text-success"
+            ][score < 2 ? 0 : score < 3 ? 1 : 2];
+        }
+        function getPrintableNum(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        $("#password").change(function () {
+            var result = zxcvbn($("#password").val());
+            console.log(result);
+            $(".score-num").text(result.score + "/5");
+            $(".score-text").text(getScoreText(result.score + 1));
+            $("#score").removeClass().addClass(getScoreText(result.score));
+            $(".guesses").text(getPrintableNum(result.guesses));
+            $(".guesses_log10").text(getPrintableNum(result.guesses_log10));
+            $(".100hr").text(result.crack_time_display.online_throttling_100_per_hour);
+            $(".10s").text(result.crack_time_display.online_no_throttling_10_per_second);
+            $(".10Ts").text(result.crack_time_display.offline_slow_hashing_1e4_per_second);
+            $(".10Bs").text(result.crack_time_display.offline_fast_hashing_1e10_per_second);
+            var feedbackExists;
+            if (result.feedback.warning !== "") {
+                $(".feedback-wrong").text(result.feedback.warning);
+                feedbackExists = true;
+            }
+            if (result.feedback.suggestions !== "") {
+                $(".feedback-suggestion").text(result.feedback.suggestions);
+                feedbackExists = true;
+            }
+            if (!feedbackExists) {
+                $(".feedback-none").removeClass("hidden");
+            }
+
 
 
         });</script>
