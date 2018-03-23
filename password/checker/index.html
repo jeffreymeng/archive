@@ -200,6 +200,7 @@
             $("#password").val(decodeURIComponent(window.location.hash.substring(1)));
             passwordHandler();
         });
+        $("#password").focus();
         $("#password").keyup(passwordHandler);
         function passwordHandler() {
             $("#share-url").val("https://archive.jeffkmeng.com/password/checker/#" + encodeURIComponent($("#password").val()));
