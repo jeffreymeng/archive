@@ -206,9 +206,9 @@
             if ($("#password").val() == null || $("#password").val() == "") {
                 $("#main").addClass("hidden");
                 $("#loading").removeClass("hidden");
+                $("#sequences").html("");
                 return;
             } else {
-                
                 $("#loading").addClass("hidden");
                 $("#main").removeClass("hidden");
             }
