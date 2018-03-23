@@ -255,20 +255,18 @@
                         attrs.push(`<li class="list-group-item"><b>${key}</b>: ${result.sequence[i][key]}</li>`);
                     }
                 }
-                var breakpoints = "";
+                var breakpoints = `<div class="w-100 d-none d-xs-block d-sm-none my-xs-3"><!-- wrap every 1 on xz--></div>`;
                 if ((i + 1) > 0) {
                     if ((i + 1) % 2 == 0) {
-                        breakpoints += `<div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>`;
+                        breakpoints += `<div class="w-100 d-none d-sm-block d-md-none my-sm-3"><!-- wrap every 2 on sm--></div>`;
                     }
                     if ((i + 1) % 3 == 0) {
-                        breakpoints += `<div class="w-100 d-none d-md-block d-lg-none"><!-- wrap every 3 on md--></div>`;
+                        breakpoints += `<div class="w-100 d-none d-md-block d-lg-none my-md-3"><!-- wrap every 3 on md--></div>`;
                     }
                     if ((i + 1) % 4 == 0) {
-                        breakpoints += `<div class="w-100 d-none d-lg-block d-xl-none"><!-- wrap every 4 on lg--></div>`;
+                        breakpoints += `<div class="w-100 d-none d-lg-block d-xl-block my-lg-3 my-xl-3"><!-- wrap every 4 on lg--></div>`;
                     }
-                    if ((i + 1) % 5 == 0) {
-                        breakpoints += `<div class="w-100 d-none d-xl-block d-lg-none"><!-- wrap every 5 on xl--></div>`;
-                    }
+                    
                 }
                 $("#sequences").append(`
                     <div class="card">
