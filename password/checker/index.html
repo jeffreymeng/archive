@@ -56,7 +56,7 @@
                 </div>
             </div>
             <hr>
-            
+
             <div class="card">
                 <div class="card-body">
                     <p class="text-muted">
@@ -82,16 +82,20 @@
                     <ul>
                         <li>
                             <b>Online attack on a service that rate limits password auth attempts(100/hour):</b>
-                            <span class="ct-100hr"></span></li>
+                            <span class="ct-100hr"></span>
+                        </li>
                         <li>
                             <b>Online attack on a service where rate limiting is not implemented or bypassed(10/second):</b>
-                            <span class="ct-10s"></span></li>
+                            <span class="ct-10s"></span>
+                        </li>
                         <li>
                             <b>Offline attack using a powerful, multi-core computer to break a slow hash(10 Thousand/second):</b>
-                            <span class="ct-10Tsr"></span></li>
+                            <span class="ct-10Tsr"></span>
+                        </li>
                         <li>
                             <b>Offline attack using a powerful, multi-core computer to break a fast hash(10 Billion/second):</b>
-                            <span class="ct-10Bs"></span></li>
+                            <span class="ct-10Bs"></span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -106,6 +110,16 @@
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jeffkmeng.com/zxcvbn/4.4.2/zxcvbn.min.js"></script>
     <script>
+        function roundTo(n, digits) {
+            if (digits === undefined) {
+                digits = 0;
+            }
+
+            var multiplicator = Math.pow(10, digits);
+            n = parseFloat((n * multiplicator).toFixed(11));
+            var test = (Math.round(n) / multiplicator);
+            return +(test.toFixed(digits));
+        }
         function getScoreText(score) {
             return [
                 "Too guessable: this is a very risky password.",
@@ -125,7 +139,7 @@
         function getPrintableNum(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-        $("#visibility").click(function() {
+        $("#visibility").click(function () {
             $("#eye").toggleClass("hidden");
             $("#eye-slash").toggleClass("hidden");
             if ($("#password").attr("type") == "password") {
@@ -141,7 +155,7 @@
             $(".score-text").text(getScoreText(result.score + 1));
             $("#score").removeClass().addClass(getScoreText(result.score));
             $(".guesses").text(getPrintableNum(result.guesses));
-            $(".guesses_log10").text(getPrintableNum(result.guesses_log10));
+            $(".guesses_log10").text(getPrintableNum(roundTo(result.guesses_log10, 2)));
             $(".100hr").text(result.crack_times_display.online_throttling_100_per_hour);
             $(".10s").text(result.crack_times_display.online_no_throttling_10_per_second);
             $(".10Ts").text(result.crack_times_display.offline_slow_hashing_1e4_per_second);
