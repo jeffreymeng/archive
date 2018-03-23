@@ -56,13 +56,7 @@
                 </div>
             </div>
             <hr>
-            <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button">Button</button>
-                    </div>
-                  </div>
-            <hr>
+            
             <div class="card">
                 <div class="card-body">
                     <p class="text-muted">
@@ -88,16 +82,16 @@
                     <ul>
                         <li>
                             <b>Online attack on a service that rate limits password auth attempts(100/hour):</b>
-                            <span class="ct-100hr"></span> seconds</li>
+                            <span class="ct-100hr"></span></li>
                         <li>
                             <b>Online attack on a service where rate limiting is not implemented or bypassed(10/second):</b>
-                            <span class="ct-10s"></span> seconds</li>
+                            <span class="ct-10s"></span></li>
                         <li>
                             <b>Offline attack using a powerful, multi-core computer to break a slow hash(10 Thousand/second):</b>
-                            <span class="ct-10Tsr"></span> seconds</li>
+                            <span class="ct-10Tsr"></span></li>
                         <li>
                             <b>Offline attack using a powerful, multi-core computer to break a fast hash(10 Billion/second):</b>
-                            <span class="ct-10Bs"></span> seconds</li>
+                            <span class="ct-10Bs"></span></li>
                     </ul>
                 </div>
             </div>
@@ -140,7 +134,7 @@
                 $("#password").attr("type", "password");
             }
         })
-        $("#password").change(function () {
+        $("#password").keyup(function () {
             var result = zxcvbn($("#password").val());
             console.log(result);
             $(".score-num").text(result.score + "/5");
