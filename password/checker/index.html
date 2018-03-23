@@ -201,6 +201,9 @@
                 for (var key in result.sequence[i]) {
                     if (result.sequence[i].hasOwnProperty(key)) {
                         if (result.sequence[i][key] == false || key == "i" || key == "j" || key == "pattern") {
+                            //i and j are included in the token
+                            //pattern is included in the heading.
+                            //if an attribute is false it's basically nonexistent.
                             continue;
                         }
                         var topush = `<li class="list-group-item"><b>${key}</b>: ${result.sequence[i][key]}</li>`;
