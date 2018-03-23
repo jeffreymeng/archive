@@ -58,7 +58,10 @@
             <hr>
 
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" id="loading">
+                    <p>Enter a password above to view real-time data.</p>
+                </div>
+                <div class="card-body hidden" id="main">
                     <p class="text-muted">
                         Took
                         <span class="calc-time"></span> ms to calculate.
@@ -156,6 +159,13 @@
             }
         })
         $("#password").keyup(function () {
+            if ($("#password").val() == null || $("#password").val() == "") {
+                $("#loading").addClass("hidden");
+                $("#main").removeClass("hidden");
+            } else {
+                $("#main").addClass("hidden");
+                $("#loading").removeClass("hidden");
+            }
             var result = zxcvbn($("#password").val());
             console.log(result);
             $(".data").text("")
