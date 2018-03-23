@@ -65,7 +65,8 @@
                     </p>
                     <p class="score-text-color" id="score">Password Score:
                         <span class="score-num data"></span>
-                        (<span class="score-text data"></span>)
+                        (
+                        <span class="score-text data"></span>)
                     </p>
                     <b>Feedback:</b>
                     <span class="text-danger feedback-wrong data"></span>
@@ -101,29 +102,9 @@
             </div>
             <hr>
             <b>Crack Sequences</b>
-            <div class="card-deck">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">'idai': Dictionary</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
-                    </div>
-                  </div>
+            <div class="card-deck" id="sequences">
+
+            </div>
         </div>
     </div>
     <div class="footer">
@@ -164,6 +145,7 @@
         function getPrintableNum(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
+
         $("#visibility").click(function () {
             $("#eye").toggleClass("hidden");
             $("#eye-slash").toggleClass("hidden");
@@ -200,6 +182,29 @@
             }
             if (!feedbackExists) {
                 $(".feedback-none").removeClass("hidden");
+            }
+            for (var i = 0; i < result.sequences.length; i++) {
+                var attrs = [];
+                for (var key in result.sequences[i]) {
+                    if (result.sequences[i].hasOwnProperty(key)) {
+                        if (result.sequences[i][key] == false || key == "i" || key == "j" || key == "pattern") {
+                            continue;
+                        }
+                        attrs.push(`<li class="list-group-item"><b>${key}</b>: ${result.sequences[i][key]}</li>`)
+
+                    }
+                }
+                $("#sequences").append(`
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><code>${result.password.substring(result.sequences[i].i, result.sequences[i].j)}<code>: ${result.sequences[i].pattern}</h5>
+                                <ul class="list-group list-group-flush">
+                                    ${attrs.join("")}
+                                </ul>
+                        </div>
+                    </div>
+                    `);
+
             }
 
 
