@@ -185,21 +185,21 @@
             } else {
                 $(".feedback-none").addClass("hidden");
             }
-            for (var i = 0; i < result.sequences.length; i++) {
+            for (var i = 0; i < result.sequence.length; i++) {
                 var attrs = [];
-                for (var key in result.sequences[i]) {
-                    if (result.sequences[i].hasOwnProperty(key)) {
-                        if (result.sequences[i][key] == false || key == "i" || key == "j" || key == "pattern") {
+                for (var key in result.sequence[i]) {
+                    if (result.sequence[i].hasOwnProperty(key)) {
+                        if (result.sequence[i][key] == false || key == "i" || key == "j" || key == "pattern") {
                             continue;
                         }
-                        attrs.push(`<li class="list-group-item"><b>${key}</b>: ${result.sequences[i][key]}</li>`)
+                        attrs.push(`<li class="list-group-item"><b>${key}</b>: ${result.sequence[i][key]}</li>`)
 
                     }
                 }
                 $("#sequences").append(`
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><code>${result.password.substring(result.sequences[i].i, result.sequences[i].j)}<code>: ${result.sequences[i].pattern}</h5>
+                            <h5 class="card-title"><code>${result.password.substring(result.sequence[i].i, result.sequence[i].j)}<code>: ${result.sequence[i].pattern}</h5>
                             <ul class="list-group list-group-flush">
                                 ${attrs.join("")}
                             </ul>
