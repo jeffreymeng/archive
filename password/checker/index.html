@@ -271,7 +271,7 @@
                 $("#sequences").append(`
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><code>${result.sequence[i].token}</code>: ${result.sequence[i].pattern}</h5>
+                            <h5 class="card-title">${result.sequence[i].token == " " ? "&lt;space&gt;" : `<code>${result.sequence[i].token}</code>`}: ${result.sequence[i].pattern}</h5>
                             <ul class="list-group list-group-flush">
                                 ${attrs.join("")}
                             </ul>
