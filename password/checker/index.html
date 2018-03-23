@@ -244,7 +244,7 @@
                 var attrs = [];
                 for (var key in result.sequence[i]) {
                     if (result.sequence[i].hasOwnProperty(key)) {
-                        if (result.sequence[i][key] == false || key == "i" || key == "j" || key == "pattern") {
+                        if (result.sequence[i][key] == false || key == "i" || key == "j" || key == "pattern" || typeof result.sequence[i][key] == "object") {
                             //i and j are included in the token
                             //pattern is included in the heading.
                             //if an attribute is false it's in the defualt state, and therefore not needed.
