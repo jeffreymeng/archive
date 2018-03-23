@@ -213,7 +213,7 @@
                 $("#main").removeClass("hidden");
             }
             var result = zxcvbn($("#password").val());
-            console.log(result);
+            //console.log(result);
             $(".data").text("")
             $(".score-num").text((result.score + 1) + "/5");
             $(".score-text").text(getScoreText(result.score));
