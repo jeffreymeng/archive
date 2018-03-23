@@ -13,7 +13,7 @@
 
     <title>Password Checker - Jeffrey Password Archives</title>
 
-    <script src="/fontawesome/js/fa-solid.min.js"></script>
+    <script src="/fontawesome/js/fa-regular.min.js"></script>
     <script src="/fontawesome/js/fontawesome.min.js"></script>
 </head>
 
@@ -38,15 +38,25 @@
             </p>
             <hr>
             <div class="input-group mb-3">
-                <input class="form-control" type="password" placeholder="type a password...">
+                <input class="form-control" type="password" placeholder="type a password..." id="password">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" title="toggle visibility"><span id="eye"><i class="far fa-eye"></i></span><span id="eye-slash"><i class="far fa-eye-slash"></i></span></button>
+                    <button class="btn btn-outline-secondary" type="button" title="toggle visibility">
+                        <span id="eye">
+                            <i class="far fa-eye"></i>
+                        </span>
+                        <span id="eye-slash" class="hidden">
+                            <i class="far fa-eye-slash"></i>
+                        </span>
+                    </button>
                 </div>
             </div>
             <hr>
             <div class="card">
                 <div class="card-body">
-                    <b>Password Score: <span class="score-num"></span><span class="score-text"></span></b>
+                    <b>Password Score:
+                        <span class="score-num"></span>
+                        <span class="score-text"></span>
+                    </b>
                 </div>
             </div>
         </div>
@@ -59,6 +69,11 @@
     <script src="/js/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script>
+        $("#password").change(function () { 
+
+
+        });</script>
 </body>
 
 </html>
