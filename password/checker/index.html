@@ -41,6 +41,9 @@
                 <a href="https://assets.jeffkmeng.com/library/zxcvbn/">Jeffrey Archives</a> /
                 <a href="https://github.com/dropbox/zxcvbn">Github</a>)
             </p>
+            <p class="text-muted">
+                Passwords are kept local. No communication is done with any server.
+            </p>
             <hr>
             <div class="input-group mb-3">
                 <input class="form-control" type="password" placeholder="type a password..." id="password">
@@ -55,6 +58,21 @@
                     </button>
                 </div>
             </div>
+            <div class="input-group mb-3" id="share">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Share your password stats:</span>
+                </div>
+                <input type="text" class="form-control" value="https://archive.jeffkmeng.com/password/checker/#password" disabled id="share-url">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" data-clipboard-target="#share-url">
+                        <img height="25" src="https://cdn.jeffkmeng.com/clipboardjs/2.0.0/clippy.svg" alt="copy to clipboard" title="copy to clipboard">
+                    </button>
+
+                </div>
+
+            </div>
+            <b>Sharing your password stats above WILL allow other people to view your password.<br>
+            If you share the URL https://archive.jeffkmeng.com/password/checker no password or stats will be shared.</b>
             <hr>
 
             <div class="card">
@@ -118,7 +136,10 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jeffkmeng.com/zxcvbn/4.4.2/zxcvbn.min.js"></script>
+    <script src="https://cdn.jeffkmeng.com/clipboardjs/2.0.0/clipboard.min.js"></script>
+    
     <script>
+        new ClipboardJS('.btn');
         function roundTo(n, digits) {
             if (digits === undefined) {
                 digits = 0;
