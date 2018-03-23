@@ -64,37 +64,37 @@
                         <span class="calc-time"></span> ms to calculate.
                     </p>
                     <p class="score-text-color" id="score">Password Score:
-                        <span class="score-num"></span>
-                        (<span class="score-text"></span>)
+                        <span class="score-num data"></span>
+                        (<span class="score-text data"></span>)
                     </p>
                     <b>Feedback:</b>
-                    <span class="text-danger feedback-wrong"></span>
-                    <span class="text-success feedback-suggestion"></span>
+                    <span class="text-danger feedback-wrong data"></span>
+                    <span class="text-success feedback-suggestion data "></span>
                     <span class="feedback-none hidden">None.</span>
                     <hr>
                     <b>Est. Number of guesses to crack:</b>
-                    <span class="guesses"></span>
+                    <span class="guesses data"></span>
                     (
-                    <span class="guesses_log10"></span> orders of magnitude)
+                    <span class="guesses_log10 data"></span> orders of magnitude)
                     <br>
                     <b>Crack times</b>:
                     <br>
                     <ul>
                         <li>
                             <b>Online attack on a service that rate limits password auth attempts(100/hour):</b>
-                            <span class="ct-100hr"></span>
+                            <span class="ct-100hr data"></span>
                         </li>
                         <li>
                             <b>Online attack on a service where rate limiting is not implemented or bypassed(10/second):</b>
-                            <span class="ct-10s"></span>
+                            <span class="ct-10s data"></span>
                         </li>
                         <li>
                             <b>Offline attack using a powerful, multi-core computer to break a slow hash(10 Thousand/second):</b>
-                            <span class="ct-10Ts"></span>
+                            <span class="ct-10Ts data"></span>
                         </li>
                         <li>
                             <b>Offline attack using a powerful, multi-core computer to break a fast hash(10 Billion/second):</b>
-                            <span class="ct-10Bs"></span>
+                            <span class="ct-10Bs data"></span>
                         </li>
                     </ul>
                 </div>
@@ -151,6 +151,7 @@
         $("#password").keyup(function () {
             var result = zxcvbn($("#password").val());
             console.log(result);
+            $(".data").text("")
             $(".score-num").text((result.score + 1) + "/5");
             $(".score-text").text(getScoreText(result.score));
             $("#score").removeClass().addClass(getScoreText(result.score));
