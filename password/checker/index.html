@@ -151,8 +151,8 @@
         $("#password").keyup(function () {
             var result = zxcvbn($("#password").val());
             console.log(result);
-            $(".score-num").text(result.score + "/5");
-            $(".score-text").text(getScoreText(result.score + 1));
+            $(".score-num").text((result.score + 1) + "/5");
+            $(".score-text").text(getScoreText(result.score));
             $("#score").removeClass().addClass(getScoreText(result.score));
             $(".guesses").text(getPrintableNum(result.guesses));
             $(".guesses_log10").text(getPrintableNum(roundTo(result.guesses_log10, 2)));
@@ -166,7 +166,9 @@
                 feedbackExists = true;
             }
             if (result.feedback.suggestions !== "") {
-                $(".feedback-suggestion").text(result.feedback.suggestions);
+                for (i = 0; i < result.feedback.suggestions; i++) {
+                    $(".feedback-suggestion").append(result.feedback.suggestions[i]);
+                }
                 feedbackExists = true;
             }
             if (!feedbackExists) {
