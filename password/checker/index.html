@@ -157,10 +157,10 @@
             $(".guesses").text(getPrintableNum(result.guesses));
             $(".guesses_log10").text(getPrintableNum(roundTo(result.guesses_log10, 2)));
             $(".calc-time").text(getPrintableNum(result.calc_time));
-            $(".100hr").text(result.crack_times_display.online_throttling_100_per_hour);
-            $(".10s").text(result.crack_times_display.online_no_throttling_10_per_second);
-            $(".10Ts").text(result.crack_times_display.offline_slow_hashing_1e4_per_second);
-            $(".10Bs").text(result.crack_times_display.offline_fast_hashing_1e10_per_second);
+            $(".ct-100hr").text(result.crack_times_display.online_throttling_100_per_hour);
+            $(".ct-10s").text(result.crack_times_display.online_no_throttling_10_per_second);
+            $(".ct-10Ts").text(result.crack_times_display.offline_slow_hashing_1e4_per_second);
+            $(".ct-10Bs").text(result.crack_times_display.offline_fast_hashing_1e10_per_second);
             var feedbackExists;
             if (result.feedback.warning !== "") {
                 $(".feedback-wrong").text(result.feedback.warning);
