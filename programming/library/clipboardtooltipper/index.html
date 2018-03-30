@@ -11,34 +11,37 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/footer.min.css">
 
-    <title>Programming - Jeffrey Archives</title>
+    <title>Clipboard Tooltipper - Jeffrey Programming Archives</title>
 
 </head>
 
 <body>
     <div class="container">
         <div class="col-lg-12">
-            <h1>Jeffrey Programming Archives</h1>
+            <h1>Clipboard.js Tooltipper - Jeffrey Programming Archives</h1>
             <!--<p class="text-muted">Welcome to the Jeffrey Archives</p>-->
             <nav class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="/">Home</a>
                 </li>
-
-                <span class="breadcrumb-item active">Programming</span>
+                <li class="breadcrumb-item">
+                    <a href="/programming/">Programming</a>
+                </li>
+                <span class="breadcrumb-item active">Libraries</span>
             </nav>
-            <ul type="1">
-                <li>
-                    <a href="/programming/mockups/">Mockups</a>
-                </li>
-                <li>
-                    <a href="/programming/assets/">Assets</a>
-                </li>
-                <li>
-                        <a href="/programming/library/">Libraries</a>
-                    </li>
 
-            </ul>
+            <p>A simple clipboard.js plugin that adds bootstrap 4 <code>copy to clipboard</code> tooltips.</p>
+            <hr>
+            <h2>Demo</h2>
+            
+            <h2>Docs</h2>
+            <h3>Method <code>init</code>(String selector)</h3>
+            <p>
+                The selector for the elements to add tooltips and attach a clipboard event to. It is recommended you use a class for your selector, like this:
+            </p>
+            <pre><code class="language-javascript">
+                clipboardtooltipper.init(".link");
+            </code></pre>
 
         </div>
     </div>
