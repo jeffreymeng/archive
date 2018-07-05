@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Jeffrey Meng">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/footer.min.css">
+
+    <title>Password Checker - Jeffrey Password Archives</title>
+
+    <script src="/fontawesome/js/fa-regular.min.js"></script>
+    <script src="/fontawesome/js/fontawesome.min.js"></script>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-lg-12">
+            <h1>Password Checker - Jeffrey Password Archives</h1>
+            <!--<p class="text-muted">Welcome to the Jeffrey Archives</p>-->
+            <nav class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="/">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="/password/">password</a>
+                </li>
+                <span class="breadcrumb-item active">checker</span>
+            </nav>
+
+            <p class="text-muted">Powered by zxcvbn (On
+                <a href="https://assets.jeffkmeng.com/library/zxcvbn/">Jeffrey Archives</a> /
+                <a href="https://github.com/dropbox/zxcvbn">Github</a>)
+            </p>
+            <p class="text-muted">
+                Passwords are kept local. No communication is done with any server.
+            </p>
+            <hr>
+            <div class="input-group mb-3">
+                <input class="form-control" type="text" placeholder="type a password..." id="password">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" type="button" title="toggle visibility" id="visibility">
+                        <span id="eye" class="hidden">
+                            <i class="far fa-eye"></i>
+                        </span>
+                        <span id="eye-slash">
+                            <i class="far fa-eye-slash"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <a data-toggle="collapse" href="#sharing" aria-expanded="false" aria-controls="sharing" id="sharing-toggle-btn">
+                Show sharing
+            </a>
+            <div class="collapse" id="sharing">
+
+                <div class="input-group mb-3" id="share">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Share your password stats:</span>
+                    </div>
+                    <input type="text" class="form-control" value="https://archive.jeffkmeng.com/password/checker/#" readonly id="share-url">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary clipboard" data-clipboard-target="#share-url">
+                            <img height="25" src="https://cdn.jeffkmeng.com/clipboardjs/2.0.0/clippy.svg" alt="copy to clipboard" title="copy to clipboard">
+                        </button>
+
+                    </div>
+
+                </div>
+                <b>Sharing your password stats above WILL allow other people to view your password.
+                    <br> If you share the URL <a class="clipboard" data-clipboard-text="https://archive.jeffkmeng.com/password/checker">https://archive.jeffkmeng.com/password/checker (click to copy link)</a> no password or stats will be shared.
+                </b>
+            </div>
+            <hr>
+
+            <div class="card">
+                <div class="card-body" id="loading">
+                    <p>Enter a password above to view real-time data.</p>
+                </div>
+                <div class="card-body hidden" id="main">
+                    <p class="text-muted">
+                        Took
+                        <span class="calc-time"></span> ms to calculate.
+                    </p>
+                    <p class="score-text-color" id="score">Password Score:
+                        <span class="score-num data"></span>
+                        (
+                        <span class="score-text data"></span>)
+                    </p>
+                    <b>Feedback:</b>
+                    <span class="text-danger feedback-wrong data"></span>
+                    <span class="text-success feedback-suggestion data "></span>
+                    <span class="feedback-none hidden">None.</span>
+                    <hr>
+                    <b>Est. Number of guesses to crack:</b>
+                    <span class="guesses data"></span>
+                    (
+                    <span class="guesses_log10 data"></span> orders of magnitude)
+                    <br>
+                    <b>Crack times</b>:
+                    <br>
+                    <ul>
+                        <li>
+                            <b>Online attack on a service that rate limits password auth attempts(100/hour):</b>
+                            <span class="ct-100hr data"></span>
+                        </li>
+                        <li>
+                            <b>Online attack on a service where rate limiting is not implemented or bypassed(10/second):</b>
+                            <span class="ct-10s data"></span>
+                        </li>
+                        <li>
+                            <b>Offline attack using a powerful, multi-core computer to break a slow hash(10 Thousand/second):</b>
+                            <span class="ct-10Ts data"></span>
+                        </li>
+                        <li>
+                            <b>Offline attack using a powerful, multi-core computer to break a fast hash(10 Billion/second):</b>
+                            <span class="ct-10Bs data"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <b>Crack Sequences</b>
+            <div class="card-deck" id="sequences">
+
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-content text-center">
+            Copyright &copy; 2017-2018 Jeffrey Meng
+        </div>
+    </div>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jeffkmeng.com/zxcvbn/4.4.2/zxcvbn.min.js"></script>
+    <script src="https://cdn.jeffkmeng.com/clipboardjs/2.0.0/clipboard.min.js"></script>
+
+    <script>
+        new ClipboardJS('.btn');
+        new ClipboardJS('.clipboard');
+        function roundTo(n, digits) {
+            if (digits === undefined) {
+                digits = 0;
+            }
+
+            var multiplicator = Math.pow(10, digits);
+            n = parseFloat((n * multiplicator).toFixed(11));
+            var test = (Math.round(n) / multiplicator);
+            return +(test.toFixed(digits));
+        }
+        function getScoreText(score) {
+            return [
+                "Too guessable: this is a very risky password.",
+                "Very guessable: protection from throttled online attacks only.",
+                "Somewhat guessable: protection from unthrottled online attacks.",
+                "Safely unguessable: moderate protection from even an offline slow-hash scenario.",
+                "Very unguessable: strong protection from the even an offline slow-hash scenario."
+            ][score]
+        }
+        function getScoreTextClass(score) {
+            return [
+                "text-danger",
+                "text-warning",
+                "text-success"
+            ][score < 2 ? 0 : score < 3 ? 1 : 2];
+        }
+        function getPrintableNum(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        var sharingSaysShow = true;
+        $("#sharing-toggle-btn").click(function () {
+            if (sharingSaysShow) {
+                sharingSaysShow = false;
+                $("#sharing-toggle-btn").text("Hide sharing");
+            } else {
+                sharingSaysShow = true;
+                $("#sharing-toggle-btn").text("Show sharing");
+            }
+        })
+        $("#visibility").click(function () {
+            $("#eye").toggleClass("hidden");
+            $("#eye-slash").toggleClass("hidden");
+            if ($("#password").attr("type") == "password") {
+                $("#password").attr("type", "text");
+            } else {
+                $("#password").attr("type", "password");
+            }
+        });
+        $(window).on('hashchange', function (e) {
+            $("#password").val(decodeURIComponent(window.location.hash.substring(1)));
+            passwordHandler();
+        });
+        $("#password").focus();
+        $("#password").keyup(passwordHandler);
+        function passwordHandler() {
+            $("#share-url").val("https://archive.jeffkmeng.com/password/checker/#" + encodeURIComponent($("#password").val()));
+            if ($("#password").val() == null || $("#password").val() == "") {
+                $("#main").addClass("hidden");
+                $("#loading").removeClass("hidden");
+                $("#sequences").html("");
+                return;
+            } else {
+                $("#loading").addClass("hidden");
+                $("#main").removeClass("hidden");
+            }
+            var result = zxcvbn($("#password").val());
+            //console.log(result);
+            $(".data").text("")
+            $(".score-num").text((result.score + 1) + "/5");
+            $(".score-text").text(getScoreText(result.score));
+            $("#score").removeClass().addClass(getScoreText(result.score));
+            $(".guesses").text(getPrintableNum(result.guesses));
+            $(".guesses_log10").text(getPrintableNum(roundTo(result.guesses_log10, 2)));
+            $(".calc-time").text(getPrintableNum(result.calc_time));
+            $(".ct-100hr").text(result.crack_times_display.online_throttling_100_per_hour);
+            $(".ct-10s").text(result.crack_times_display.online_no_throttling_10_per_second);
+            $(".ct-10Ts").text(result.crack_times_display.offline_slow_hashing_1e4_per_second);
+            $(".ct-10Bs").text(result.crack_times_display.offline_fast_hashing_1e10_per_second);
+            var feedbackExists = false;
+            if (result.feedback.warning !== "") {
+                $(".feedback-wrong").text(result.feedback.warning);
+                feedbackExists = true;
+            }
+            if (result.feedback.suggestions !== "") {
+                for (i = 0; i < result.feedback.suggestions; i++) {
+                    $(".feedback-suggestion").append(result.feedback.suggestions[i]);
+                }
+                feedbackExists = true;
+            }
+            if (!feedbackExists) {
+                $(".feedback-none").removeClass("hidden");
+            } else {
+                $(".feedback-none").addClass("hidden");
+            }
+            $("#sequences").html("");
+            for (var i = 0; i < result.sequence.length; i++) {
+                var attrs = [];
+                for (var key in result.sequence[i]) {
+                    if (result.sequence[i].hasOwnProperty(key)) {
+                        if (result.sequence[i][key] == false || key == "i" || key == "j" || key == "pattern" || typeof result.sequence[i][key] == "object") {
+                            //i and j are included in the token
+                            //pattern is included in the heading.
+                            //if an attribute is false it's in the defualt state, and therefore not needed.
+                            continue;
+                        }
+
+                        attrs.push(`<li class="list-group-item"><b>${key}</b>: ${result.sequence[i][key]}</li>`);
+                    }
+                }
+                var breakpoints = `<div class="w-100 d-none d-xs-block d-sm-none my-xs-3"><!-- wrap every 1 on xs--></div>`;
+                if ((i + 1) > 0) {
+                    if ((i + 1) % 2 == 0) {
+                        breakpoints += `<div class="w-100 d-none d-sm-block d-md-none my-sm-3"><!-- wrap every 2 on sm--></div>`;
+                    }
+                    if ((i + 1) % 3 == 0) {
+                        breakpoints += `<div class="w-100 d-none d-md-block d-lg-none my-md-3"><!-- wrap every 3 on md--></div>`;
+                    }
+                    if ((i + 1) % 4 == 0) {
+                        breakpoints += `<div class="w-100 d-none d-lg-block d-xl-block my-lg-3 my-xl-3"><!-- wrap every 4 on lg and xl--></div>`;
+                    }
+                    
+                }
+                $("#sequences").append(`
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">${result.sequence[i].token == " " ? "&lt;space&gt;" : `<code>${result.sequence[i].token}</code>`}: ${result.sequence[i].pattern}</h5>
+                            <ul class="list-group list-group-flush">
+                                ${attrs.join("")}
+                            </ul>
+                        </div>
+                    </div>
+                    ${breakpoints}
+                `);
+
+            }
+
+
+
+        }</script>
+</body>
+
+</html>
